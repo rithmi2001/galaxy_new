@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About Us — AutoCoat Paint Systems | Professional Automotive Coatings</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;500;600;700;800&family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+<link rel="stylesheet" href="style.css">
+<style>
+  /* =========================================================
+     DESIGN TOKENS — same industrial black / molten gold system
+     used across the Galaxy / AutoCoat site.
+  ========================================================== */
+  :root{
+    --black:#050505;
+    --black-soft:#0d0d0d;
+    --black-card:#0d0d0d;
+    --white:#fff;
+    --gold:#f0a91a;
+    --gold-light:#ffcf5c;
+    --grey:#a5a5a5;
+    --grey-dim:#7a7a7a;
+    --gray-light:#b0b0b0;
+    --border:rgba(255,255,255,.08);
+    --radius:18px;
+    --font-display:'Bricolage Grotesque', sans-serif;
+    --font-heavy:'Archivo Black', sans-serif;
+    --font-body:'Archivo', sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{font-family:var(--font-body);background:var(--black);color:var(--white);line-height:1.6;overflow-x:hidden;}
+  img{max-width:100%;display:block;}
+  a{text-decoration:none;color:inherit;}
+  button{font-family:inherit;cursor:pointer;border:none;}
+  h1,h2,h3,h4{font-family:var(--font-display);}
+  .container{max-width:1280px;margin:0 auto;padding:0 48px;}
+
+  /* ===== ENTRY / SLIDING SCROLL ANIMATIONS ===== */
+  .fade-up{opacity:0;transform:translateY(42px);transition:opacity .9s cubic-bezier(.2,.7,.2,1), transform .9s cubic-bezier(.2,.7,.2,1);}
+  .fade-up.in-view{opacity:1;transform:translateY(0);}
+  .slide-left{opacity:0;transform:translateX(-60px);transition:opacity .9s cubic-bezier(.2,.7,.2,1), transform .9s cubic-bezier(.2,.7,.2,1);}
+  .slide-left.in-view{opacity:1;transform:translateX(0);}
+  .slide-right{opacity:0;transform:translateX(60px);transition:opacity .9s cubic-bezier(.2,.7,.2,1), transform .9s cubic-bezier(.2,.7,.2,1);}
+  .slide-right.in-view{opacity:1;transform:translateX(0);}
+  .zoom-in{opacity:0;transform:scale(.9);transition:opacity .8s ease, transform .8s ease;}
+  .zoom-in.in-view{opacity:1;transform:scale(1);}
+  .stagger > *{opacity:0;transform:translateY(30px);transition:opacity .65s ease, transform .65s ease;}
+  .stagger.in-view > *{opacity:1;transform:translateY(0);}
+  .stagger.in-view > *:nth-child(1){transition-delay:.04s;}
+  .stagger.in-view > *:nth-child(2){transition-delay:.11s;}
+  .stagger.in-view > *:nth-child(3){transition-delay:.18s;}
+  .stagger.in-view > *:nth-child(4){transition-delay:.25s;}
+  .stagger.in-view > *:nth-child(5){transition-delay:.32s;}
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:.001s !important;transition:none !important;}
+    .fade-up,.slide-left,.slide-right,.zoom-in,.stagger > *{opacity:1 !important;transform:none !important;}
+  }
+
+  @keyframes floatPulse{
+    0%,100%{transform:translateY(0);}
+    50%{transform:translateY(-7px);}
+  }
+  @keyframes heroPop{
+    from{opacity:0;transform:translateY(30px);}
+    to{opacity:1;transform:translateY(0);}
+  }
+
+  .about-page{background:var(--black);color:var(--white);}
+
+  /* ---------- COMMON ---------- */
+  .section-label{
+    color:var(--gold);
+    font-size:.8rem;
+    font-weight:700;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    display:block;
+    margin-bottom:20px;
+  }
+
+  .btn-primary{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    background:var(--gold);
+    color:#160f00;
+    padding:15px 30px;
+    border-radius:10px;
+    font-weight:700;
+    font-size:14.5px;
+    text-decoration:none;
+    transition:.3s cubic-bezier(.2,.8,.2,1);
+  }
+  .btn-primary:hover{
+    transform:translateY(-3px);
+    background:var(--gold-light);
+    box-shadow:0 12px 28px rgba(240,169,26,.35);
+  }
+
+  .about-hero,
+  .story-section,
+  .values-section,
+  .team-section{
+    padding:110px 0;
+  }
+
+  /* ---------- HERO ---------- */
+  .about-hero{padding-top:150px;}
+  .about-grid{
+    display:grid;
+    grid-template-columns:1fr 1.2fr;
+    gap:60px;
+    align-items:center;
+  }
+
+  .about-content h1{
+    font-size:clamp(32px,5.2vw,64px);
+    font-weight:800;
+    line-height:1.08;
+    margin-bottom:25px;
+    text-transform:uppercase;
+  }
+
+  .about-content h1 span{
+    color:var(--gold);
+    display:block;
+  }
+
+  .about-content p{
+    color:var(--grey);
+    line-height:1.9;
+    margin-bottom:32px;
+    max-width:480px;
+  }
+
+  .about-image{border-radius:20px;overflow:hidden;border:1px solid var(--border);}
+  .about-image img{
+    width:100%;height:100%;object-fit:cover;
+    aspect-ratio:4/3.2;
+    transition:transform .8s ease;
+  }
+  .about-image:hover img{transform:scale(1.06);}
+
+  /* ---------- STATS ---------- */
+  .about-stats{padding-bottom:100px;}
+  .stats-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:20px;
+  }
+  .stat-card{
+    background:var(--black-card);
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    padding:36px 30px;
+    text-align:center;
+    transition:.35s;
+  }
+  .stat-card:hover{transform:translateY(-8px);border-color:var(--gold);}
+  .stat-card i{
+    color:var(--gold);font-size:2rem;
+    display:inline-block;animation:floatPulse 3.6s ease-in-out infinite;
+  }
+  .stat-card h3{
+    font-size:2.1rem;margin:16px 0 6px;font-weight:700;
+  }
+  .stat-card p{color:var(--grey);font-size:13.5px;text-transform:uppercase;letter-spacing:1px;}
+
+  /* ---------- STORY ---------- */
+  .story-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:60px;
+    align-items:center;
+  }
+
+  .story-image{border-radius:20px;overflow:hidden;border:1px solid var(--border);}
+  .story-image img{
+    width:100%;height:100%;object-fit:cover;aspect-ratio:4/3.3;
+    transition:transform .8s ease;
+  }
+  .story-image:hover img{transform:scale(1.06);}
+
+  .story-content h2{
+    font-size:clamp(28px,3.6vw,46px);
+    line-height:1.18;
+    margin-bottom:25px;
+    font-weight:700;
+  }
+
+  .story-content h2 span{
+    color:var(--gold);
+    display:block;
+  }
+
+  .story-content p{
+    color:var(--gray-light);
+    line-height:1.9;
+    margin-bottom:20px;
+  }
+
+  /* ---------- VALUES ---------- */
+  .values-section{background:linear-gradient(180deg, var(--black), #090909);}
+  .section-heading{
+    text-align:center;
+    margin-bottom:60px;
+    max-width:600px;
+    margin-left:auto;
+    margin-right:auto;
+  }
+
+  .section-heading span{
+    color:var(--gold);
+    font-weight:700;
+    font-size:12.5px;
+    letter-spacing:2.5px;
+    text-transform:uppercase;
+  }
+
+  .section-heading h2{
+    margin-top:15px;
+    font-size:clamp(28px,3.6vw,42px);
+    font-weight:700;
+  }
+
+  .values-grid{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:20px;
+  }
+
+  .value-card{
+    background:var(--black-card);
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    padding:32px 26px;
+    transition:.35s;
+  }
+  .value-card:hover{transform:translateY(-8px);border-color:var(--gold);}
+
+  .value-card i{
+    color:var(--gold);font-size:2rem;
+    width:56px;height:56px;border-radius:50%;background:rgba(240,169,26,.12);
+    display:flex;align-items:center;justify-content:center;
+    animation:floatPulse 3.8s ease-in-out infinite;
+  }
+
+  .value-card h4{
+    margin:22px 0 10px;font-size:16px;font-weight:700;font-family:var(--font-body);
+  }
+  .value-card p{color:var(--grey);font-size:13.5px;line-height:1.6;}
+
+  /* ---------- TEAM ---------- */
+  .team-section{background:#090909;}
+  .team-layout{
+    display:grid;
+    grid-template-columns:350px 1fr;
+    gap:40px;
+  }
+
+  .team-intro h2{
+    font-size:clamp(26px,3.4vw,42px);
+    margin-bottom:20px;
+    font-weight:700;
+    line-height:1.2;
+  }
+
+  .team-intro h2 span{
+    color:var(--gold);
+    display:block;
+  }
+
+  .team-intro p{
+    color:var(--grey);
+    margin-bottom:30px;
+    line-height:1.8;
+  }
+
+  .team-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:20px;
+  }
+
+  .team-card{
+    background:var(--black-card);
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    overflow:hidden;
+    transition:.35s;
+  }
+  .team-card:hover{transform:translateY(-8px);border-color:var(--gold);}
+
+  .team-card img{
+    width:100%;
+    height:280px;
+    object-fit:cover;
+    transition:transform .6s ease;
+  }
+  .team-card:hover img{transform:scale(1.08);}
+
+  .team-card h4{
+    padding:20px 20px 4px;
+    font-size:16px;
+    font-weight:700;
+    font-family:var(--font-body);
+  }
+
+  .team-card span{
+    color:var(--gold);
+    display:block;
+    padding:0 20px 20px;
+    font-size:13px;
+  }
+
+  /* ---------- CTA ---------- */
+  .about-cta{
+    padding-bottom:110px;
+  }
+
+  .cta-box{
+    position:relative;
+    background:var(--black-card);
+    border:1px solid var(--border);
+    border-radius:20px;
+    padding:44px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:30px;
+    overflow:hidden;
+  }
+  .cta-box::before{
+    content:"";
+    position:absolute;
+    inset:auto -8% -60% auto;
+    width:280px;height:280px;border-radius:50%;
+    background:radial-gradient(circle, rgba(240,169,26,.18), transparent 68%);
+    pointer-events:none;
+  }
+
+  .cta-box h3{
+    font-size:clamp(22px,2.6vw,32px);
+    margin-bottom:10px;
+    font-weight:700;
+    position:relative;
+  }
+
+  .cta-box p{color:var(--grey);position:relative;}
+  .cta-box a{position:relative;flex:0 0 auto;}
+
+  /* ---------- BACK TO TOP ---------- */
+  .back-to-top{
+    position:fixed;bottom:26px;right:26px;width:46px;height:46px;border-radius:50%;
+    background:var(--gold);color:#160f00;display:flex;align-items:center;justify-content:center;
+    font-size:19px;cursor:pointer;opacity:0;visibility:hidden;transition:.3s;z-index:200;
+    box-shadow:0 8px 20px rgba(0,0,0,.4);
+  }
+  .back-to-top.show{opacity:1;visibility:visible;}
+  .back-to-top:hover{background:var(--gold-light);transform:translateY(-3px);}
+  .back-to-top:focus-visible,a:focus-visible,button:focus-visible{
+    outline:2px solid var(--gold);outline-offset:2px;
+  }
+
+  /* ---------- MOBILE ---------- */
+  @media(max-width:1100px){
+    .values-grid{grid-template-columns:repeat(3,1fr);}
+  }
+  @media(max-width:991px){
+    .container{padding:0 28px;}
+    .about-hero,.story-section,.values-section,.team-section{padding:80px 0;}
+    .about-hero{padding-top:120px;}
+
+    .about-grid,
+    .story-grid,
+    .team-layout{
+      grid-template-columns:1fr;
+    }
+
+    .about-content h1{
+      font-size:2.6rem;
+    }
+
+    .story-content h2,
+    .team-intro h2,
+    .section-heading h2{
+      font-size:2rem;
+    }
+
+    .stats-grid{
+      grid-template-columns:repeat(2,1fr);
+    }
+
+    .values-grid{
+      grid-template-columns:repeat(2,1fr);
+    }
+
+    .team-grid{
+      grid-template-columns:repeat(2,1fr);
+    }
+
+    .cta-box{
+      flex-direction:column;
+      gap:25px;
+      text-align:center;
+    }
+  }
+
+  @media(max-width:576px){
+    .container{padding:0 20px;}
+    .team-grid{
+      grid-template-columns:1fr;
+    }
+
+    .stats-grid{
+      grid-template-columns:1fr;
+    }
+
+    .values-grid{
+      grid-template-columns:1fr;
+    }
+
+    .about-content h1{
+      font-size:2.1rem;
+    }
+    .about-content p{max-width:none;}
+    .cta-box{padding:32px 24px;}
+    .team-card img{height:240px;}
+  }
+</style>
+</head>
+<body>
+
+<div id="site-header"></div>
+
+<main class="about-page">
+
+    <!-- ABOUT HERO -->
+    <section class="about-hero">
+        <div class="container">
+
+            <div class="about-grid">
+
+                <div class="about-content slide-left">
+
+                    <span class="section-label">
+                        WHO WE ARE
+                    </span>
+
+                    <h1>
+                        Driven by Passion.
+                        <span>Defined by Quality.</span>
+                    </h1>
+
+                    <p>
+                        At Galaxy Paints, we believe every surface tells a story.
+                        Established with a vision to deliver world-class coatings and
+                        finishes, we combine advanced technology with unmatched expertise
+                        to provide products professionals trust.
+                    </p>
+
+                    <a href="#" class="btn-primary">
+                        Our Journey
+                        <i class="ri-arrow-right-line"></i>
+                    </a>
+
+                </div>
+
+                <div class="about-image slide-right">
+                    <img src="https://images.unsplash.com/photo-1580273916550-e323be2ae537?w=1000&q=80&auto=format&fit=crop" alt="Automotive paint workshop with a car being refinished">
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- STATS -->
+    <section class="about-stats">
+        <div class="container">
+
+            <div class="stats-grid stagger">
+
+                <div class="stat-card">
+                    <i class="ri-trophy-line"></i>
+                    <h3>15+</h3>
+                    <p>Years of Excellence</p>
+                </div>
+
+                <div class="stat-card">
+                    <i class="ri-building-4-line"></i>
+                    <h3>50,000+</h3>
+                    <p>Happy Professionals</p>
+                </div>
+
+                <div class="stat-card">
+                    <i class="ri-global-line"></i>
+                    <h3>25+</h3>
+                    <p>Countries Reached</p>
+                </div>
+
+                <div class="stat-card">
+                    <i class="ri-flask-line"></i>
+                    <h3>100+</h3>
+                    <p>Premium Products</p>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- STORY -->
+    <section class="story-section">
+
+        <div class="container">
+
+            <div class="story-grid">
+
+                <div class="story-image slide-left">
+                    <img src="https://images.unsplash.com/photo-1615906655593-ad0386982a0f?w=1000&q=80&auto=format&fit=crop" alt="Chemist mixing automotive paint in a laboratory">
+                </div>
+
+                <div class="story-content slide-right">
+
+                    <span class="section-label">
+                        OUR STORY
+                    </span>
+
+                    <h2>
+                        Built on Trust.
+                        <span>Focused on Innovation.</span>
+                    </h2>
+
+                    <p>
+                        Galaxy Paints was founded with a simple mission — to deliver
+                        high-performance coatings that meet the evolving needs of
+                        professionals.
+                    </p>
+
+                    <p>
+                        From our humble beginnings to becoming a trusted name in the
+                        industry, our commitment to quality, innovation, and customer
+                        satisfaction has remained at the core of everything we do.
+                    </p>
+
+                    <a href="#" class="btn-primary">
+                        Learn More About Us
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- VALUES -->
+    <section class="values-section">
+
+        <div class="container">
+
+            <div class="section-heading fade-up">
+                <span>OUR VALUES</span>
+                <h2>The Principles That Drive Us</h2>
+            </div>
+
+            <div class="values-grid stagger">
+
+                <div class="value-card">
+                    <i class="ri-shield-check-line"></i>
+                    <h4>Quality First</h4>
+                    <p>We never compromise on quality.</p>
+                </div>
+
+                <div class="value-card">
+                    <i class="ri-lightbulb-flash-line"></i>
+                    <h4>Innovation</h4>
+                    <p>Creative solutions that move forward.</p>
+                </div>
+
+                <div class="value-card">
+                    <i class="ri-hand-heart-line"></i>
+                    <h4>Integrity</h4>
+                    <p>Honest business relationships.</p>
+                </div>
+
+                <div class="value-card">
+                    <i class="ri-team-line"></i>
+                    <h4>Customer Focus</h4>
+                    <p>Your success is our success.</p>
+                </div>
+
+                <div class="value-card">
+                    <i class="ri-leaf-line"></i>
+                    <h4>Sustainability</h4>
+                    <p>Building for tomorrow.</p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- TEAM -->
+    <section class="team-section">
+
+        <div class="container">
+
+            <div class="team-layout">
+
+                <div class="team-intro fade-up">
+
+                    <span class="section-label">
+                        THE PEOPLE BEHIND GALAXY
+                    </span>
+
+                    <h2>
+                        A Team That
+                        <span>Cares &amp; Delivers</span>
+                    </h2>
+
+                    <p>
+                        Our team of experts, chemists, innovators and support
+                        professionals work together to bring you the best products.
+                    </p>
+
+                    <a href="#" class="btn-primary">
+                        Meet Our Team
+                    </a>
+
+                </div>
+
+                <div class="team-grid stagger">
+
+                    <div class="team-card">
+                        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=500&q=80&auto=format&fit=crop" alt="Arjun Mehta, CEO and Founder">
+                        <h4>Arjun Mehta</h4>
+                        <span>CEO &amp; Founder</span>
+                    </div>
+
+                    <div class="team-card">
+                        <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=500&q=80&auto=format&fit=crop" alt="Neha Sharma, Head of R&D">
+                        <h4>Neha Sharma</h4>
+                        <span>Head of R&amp;D</span>
+                    </div>
+
+                    <div class="team-card">
+                        <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=500&q=80&auto=format&fit=crop" alt="Vikram Singh, Production Head">
+                        <h4>Vikram Singh</h4>
+                        <span>Production Head</span>
+                    </div>
+
+                    <div class="team-card">
+                        <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=500&q=80&auto=format&fit=crop" alt="Pooja Verma, Quality Head">
+                        <h4>Pooja Verma</h4>
+                        <span>Quality Head</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- CTA -->
+    <section class="about-cta">
+
+        <div class="container">
+
+            <div class="cta-box zoom-in">
+
+                <div>
+                    <h3>
+                        Let's Create Something Extraordinary Together
+                    </h3>
+
+                    <p>
+                        Partner with Galaxy Paints for quality products,
+                        expert support and lasting results.
+                    </p>
+                </div>
+
+                <a href="#contact" class="btn-primary">
+                    Contact Us Today
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+<div id="site-footer"></div>
+
+<button class="back-to-top" id="backToTop" aria-label="Back to top">&uarr;</button>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+  // ===== SCROLL REVEAL (entry + sliding animations) =====
+  const revealEls = document.querySelectorAll('.fade-up, .slide-left, .slide-right, .zoom-in, .stagger');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in-view');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  revealEls.forEach(el => observer.observe(el));
+
+  // Hero reveals immediately on load instead of waiting for scroll
+  window.addEventListener('load', () => {
+    document.querySelectorAll('.about-hero .slide-left, .about-hero .slide-right').forEach(el => el.classList.add('in-view'));
+  });
+
+  // ===== SMOOTH SCROLL =====
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', e => {
+      const id = link.getAttribute('href');
+      if (id.length > 1) {
+        const target = document.querySelector(id);
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }
+    });
+  });
+
+  // ===== BACK TO TOP =====
+  const backToTop = document.getElementById('backToTop');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 400) backToTop.classList.add('show');
+    else backToTop.classList.remove('show');
+  });
+  backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+</script>
+<script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AutoCoat Paint Systems | Contact</title>
+<meta name="description" content="Get in touch with AutoCoat's team for product advice, technical support, or a quote on professional automotive coatings.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;500;600;700;800&family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="style.css">
+<style>
+	/* =========================================================
+   AUTOCOAT — Premium Automotive Paint Systems
+   ========================================================= */
+
+:root{
+  --black:        #0a0a0a;
+  --black-soft:    #111111;
+  --panel:         #161616;
+  --panel-line:    #262422;
+  --gold:          #F5B514;
+  --gold-bright:   #FFD24A;
+  --gold-dim:      #9c7406;
+  --white:         #f6f5f2;
+  --grey:          #a8a6a1;
+  --grey-dim:      #6e6c68;
+
+  --font-display: 'Archivo Black', 'Bricolage Grotesque', sans-serif;
+  --font-body: 'Archivo', sans-serif;
+
+  --radius: 10px;
+  --container: 1240px;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--black);
+  color:var(--white);
+  font-family:var(--font-body);
+  line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+img{max-width:100%;display:block;}
+.container{max-width:var(--container);margin:0 auto;padding:0 24px;}
+em{font-style:italic;color:var(--gold);font-weight:400;}
+a{color:inherit;text-decoration:none;}
+
+/* Lock scroll while the mobile menu is open */
+body.nav-open{overflow:hidden;}
+
+/* ---------- Buttons ---------- */
+.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:14px 28px;font-size:14.5px;font-weight:700;letter-spacing:.2px;
+  border-radius:6px;border:1px solid transparent;cursor:pointer;
+  transition:transform .25s ease, box-shadow .25s ease, background .25s ease, color .25s ease;
+  white-space:nowrap;
+}
+.btn span{transition:transform .25s ease;}
+.btn:hover span{transform:translateX(3px);}
+.btn-primary{
+  background:linear-gradient(135deg, var(--gold-bright), var(--gold));
+  color:#1a1300;
+  box-shadow:0 8px 24px -8px rgba(245,181,20,.55);
+}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 14px 30px -8px rgba(245,181,20,.65);}
+.btn-outline{background:rgba(255,255,255,.04);border:1px solid #3a3935;color:var(--white);}
+.btn-outline:hover{border-color:var(--gold);color:var(--gold);transform:translateY(-2px);}
+.btn-block{width:100%;justify-content:center;}
+
+/* ---------- Eyebrow / section heads ---------- */
+.eyebrow{
+  display:flex;align-items:center;gap:10px;font-size:12.5px;font-weight:800;
+  letter-spacing:1.6px;text-transform:uppercase;color:var(--gold);margin-bottom:18px;
+}
+.eyebrow.center{justify-content:center;}
+.eyebrow-bar{width:22px;height:2px;background:var(--gold);display:inline-block;}
+.section-head{text-align:center;max-width:640px;margin:0 auto 56px;}
+.section-head .eyebrow{justify-content:center;}
+
+h1,h2,h3,h4{font-family:var(--font-display);font-weight:400;line-height:1.1;letter-spacing:-.5px;}
+h1{font-size:clamp(36px,5.2vw,58px);margin-bottom:20px;}
+h2{font-size:clamp(28px,4vw,42px);margin-bottom:14px;}
+h3{font-size:18px;margin-bottom:8px;font-family:var(--font-body);font-weight:700;letter-spacing:0;}
+.section-sub,.hero-sub{color:var(--grey);font-size:16px;max-width:520px;}
+.section-head .section-sub{margin:0 auto;}
+
+/* =========================================================
+   HEADER (kept for shared stylesheet compatibility — no
+   header markup is rendered on this page)
+   ========================================================= */
+.site-header{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  background:rgba(10,10,10,.75);backdrop-filter:blur(14px);
+  border-bottom:1px solid rgba(255,255,255,.06);transition:background .3s ease, box-shadow .3s ease;
+}
+.header-inner{display:flex;align-items:center;justify-content:space-between;height:78px;gap:24px;}
+.brand{display:flex;align-items:center;gap:10px;flex-shrink:0;}
+.brand-mark{
+  width:38px;height:38px;border-radius:8px;
+  background:linear-gradient(135deg,var(--gold-bright),var(--gold-dim));
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-display);font-size:20px;color:#1a1300;
+}
+.brand-text{font-family:var(--font-display);font-size:15px;letter-spacing:1px;line-height:1.1;}
+.brand-text small{font-size:8.5px;color:var(--grey-dim);letter-spacing:2px;font-family:var(--font-body);font-weight:600;}
+.main-nav{display:flex;gap:32px;font-size:14.5px;font-weight:600;flex:1;justify-content:center;}
+.main-nav a{position:relative;color:var(--grey);padding:6px 2px;transition:color .2s ease;}
+.main-nav a:hover,.main-nav a.active{color:var(--white);}
+.main-nav a.active::after{content:'';position:absolute;left:0;right:0;bottom:-4px;height:2px;background:var(--gold);}
+.header-cta{padding:11px 22px;font-size:13.5px;}
+
+.nav-toggle{
+  display:none;flex-direction:column;justify-content:center;align-items:center;gap:5px;
+  width:44px;height:44px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);
+  border-radius:12px;cursor:pointer;padding:6px;flex-shrink:0;
+  transition:background .2s ease, border-color .2s ease, transform .2s ease;
+}
+.nav-toggle:hover{background:rgba(255,255,255,.07);border-color:rgba(245,181,20,.25);transform:translateY(-1px);}
+.nav-toggle span{width:20px;height:2px;background:var(--white);border-radius:2px;transition:transform .25s ease, opacity .25s ease, background .25s ease, width .25s ease;}
+.nav-toggle.active span{background:var(--gold);}
+.nav-toggle.active span:nth-child(1){transform:translateY(7px) rotate(45deg);width:22px;}
+.nav-toggle.active span:nth-child(2){opacity:0;}
+.nav-toggle.active span:nth-child(3){transform:translateY(-7px) rotate(-45deg);width:22px;}
+
+.nav-backdrop{
+  position:fixed;inset:0;top:78px;
+  background:rgba(0,0,0,.72);
+  opacity:0;visibility:hidden;
+  transition:opacity .3s ease, visibility .3s ease;
+  z-index:900;
+}
+.nav-backdrop.show{opacity:1;visibility:visible;}
+
+/* =========================================================
+   SECTIONS GENERAL
+   ========================================================= */
+.section{padding:100px 0;}
+.center-cta{text-align:center;margin-top:48px;}
+
+/* =========================================================
+   PRODUCTS (kept for shared stylesheet compatibility)
+   ========================================================= */
+.product-card{background:#111;border:1px solid rgba(245,181,20,.15);border-radius:16px;overflow:hidden;transition:.35s ease;}
+.product-card.featured{border-color:#F5B514;}
+.product-card:hover{transform:translateY(-8px);border-color:#F5B514;box-shadow:0 20px 40px rgba(0,0,0,.45),0 0 30px rgba(245,181,20,.15);}
+.product-thumb{height:240px;display:flex;align-items:center;justify-content:center;padding:20px;background:linear-gradient(180deg,#161616 0%,#0c0c0c 100%);}
+.product-thumb img{max-height:200px;width:auto;transition:.4s;}
+.product-card:hover img{transform:scale(1.05);}
+.product-card h3{padding:18px 20px 6px;color:#fff;font-size:20px;}
+.product-card p{padding:0 20px;color:#b8b8b8;min-height:50px;font-size:14px;}
+.product-link{display:inline-block;padding:14px 20px 20px;color:#F5B514;font-weight:700;font-size:14px;}
+.product-link:hover{color:#FFD24A;}
+
+.swiper-button-next,.swiper-button-prev{
+  width:46px;height:46px;border-radius:50%;
+  background:rgba(255,255,255,.06);backdrop-filter:blur(10px);
+  border:1px solid rgba(255,255,255,.08);color:#F5B514;
+}
+.swiper-button-next:after,.swiper-button-prev:after{font-size:16px;font-weight:700;}
+.swiper-button-disabled{opacity:.3 !important;}
+
+@media(max-width:768px){
+  .swiper-button-next,.swiper-button-prev{display:none;}
+}
+
+/* =========================================================
+   WHAT WE OFFER — single row
+   ========================================================= */
+.offer-section{background:var(--black-soft);}
+.offer-row{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;}
+.offer-item{
+  display:flex;align-items:flex-start;gap:14px;padding:22px;
+  background:rgba(255,255,255,.02);border:1px solid rgba(245,181,20,.15);
+  border-radius:14px;transition:.3s;
+}
+.offer-item:hover{border-color:#F5B514;transform:translateY(-4px);}
+.offer-icon{
+  width:46px;height:46px;flex-shrink:0;display:flex;align-items:center;justify-content:center;
+  border-radius:12px;background:rgba(245,181,20,.12);border:1px solid rgba(245,181,20,.3);
+  color:#F5B514;font-size:18px;
+}
+.offer-item h4{color:#fff;font-size:15px;margin-bottom:6px;font-weight:700;}
+.offer-item p{color:rgba(255,255,255,.6);font-size:13px;line-height:1.5;}
+@media(max-width:900px){.offer-row{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:576px){.offer-row{grid-template-columns:1fr;}}
+
+/* =========================================================
+   FOOTER (kept for shared stylesheet compatibility)
+   ========================================================= */
+.site-footer{background:#070707;border-top:1px solid var(--panel-line);padding:70px 0 0;}
+.footer-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr 1fr;gap:40px;padding-bottom:50px;border-bottom:1px solid var(--panel-line);}
+.footer-brand p{color:var(--grey-dim);font-size:13.5px;margin:18px 0 20px;max-width:280px;}
+.social-row{display:flex;gap:10px;}
+.social-row a{width:36px;height:36px;border-radius:50%;background:var(--panel);display:flex;align-items:center;justify-content:center;transition:background .2s ease, color .2s ease;color:var(--white);font-size:13px;}
+.social-row a:hover{background:var(--gold);color:#1a1300;}
+.footer-col h4{font-family:var(--font-body);font-size:13px;letter-spacing:1px;text-transform:uppercase;color:var(--white);margin-bottom:18px;}
+.footer-col a,.footer-col p{display:block;color:var(--grey-dim);font-size:13.5px;margin-bottom:12px;transition:color .2s ease;}
+.footer-col a:hover{color:var(--gold);}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;padding:24px 0;font-size:12.5px;color:var(--grey-dim);}
+.footer-legal{display:flex;gap:24px;}
+.footer-legal a:hover{color:var(--gold);}
+
+@media(max-width:640px){
+  .footer-grid{grid-template-columns:1fr 1fr;}
+  .footer-brand{grid-column:1/-1;}
+  .footer-bottom{flex-direction:column;gap:14px;text-align:center;}
+}
+
+/* =========================================================
+   BACK TO TOP
+   ========================================================= */
+.back-to-top{
+  position:fixed;bottom:28px;right:28px;width:46px;height:46px;border-radius:50%;
+  background:var(--gold);color:#1a1300;border:none;font-size:18px;cursor:pointer;
+  opacity:0;pointer-events:none;transform:translateY(10px);
+  transition:opacity .3s ease, transform .3s ease;z-index:900;
+  box-shadow:0 10px 24px -8px rgba(245,181,20,.6);
+}
+.back-to-top.show{opacity:1;pointer-events:auto;transform:translateY(0);}
+.back-to-top:hover{background:var(--gold-bright);transform:translateY(-3px);}
+.back-to-top:focus-visible,a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
+  outline:2px solid var(--gold);outline-offset:2px;
+}
+
+/* =========================================================
+   REVEAL ANIMATION (entry + sliding)
+   ========================================================= */
+[data-reveal]{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.2,.7,.2,1), transform .8s cubic-bezier(.2,.7,.2,1);}
+[data-reveal="left"]{transform:translateX(-52px);}
+[data-reveal="right"]{transform:translateX(52px);}
+[data-reveal="zoom"]{transform:scale(.92);}
+[data-reveal].in-view{opacity:1;transform:none;}
+
+/* Staggered entrance for grids / lists of cards */
+.stagger > *{opacity:0;transform:translateY(26px);transition:opacity .6s ease, transform .6s ease;}
+.stagger.in-view > *{opacity:1;transform:translateY(0);}
+.stagger.in-view > *:nth-child(1){transition-delay:.05s;}
+.stagger.in-view > *:nth-child(2){transition-delay:.12s;}
+.stagger.in-view > *:nth-child(3){transition-delay:.19s;}
+.stagger.in-view > *:nth-child(4){transition-delay:.26s;}
+.stagger.in-view > *:nth-child(5){transition-delay:.33s;}
+.stagger.in-view > *:nth-child(6){transition-delay:.40s;}
+
+@media (prefers-reduced-motion: reduce){
+  [data-reveal],.stagger > *{opacity:1;transform:none;transition:none;}
+}
+
+/* =========================================================
+   RESPONSIVE NAV (shared stylesheet compatibility)
+   ========================================================= */
+@media (max-width:900px){
+  .main-nav{
+    position:fixed;top:78px;left:12px;right:12px;width:auto;
+    background:linear-gradient(180deg, rgba(18,18,18,.99) 0%, rgba(10,10,10,.99) 100%);
+    backdrop-filter:blur(18px);
+    flex-direction:column;align-items:flex-start;padding:22px 24px 28px;gap:10px;
+    border-bottom:1px solid rgba(255,255,255,.08);
+    transform:translateY(-8px);opacity:0;visibility:hidden;transition:transform .25s ease, opacity .25s ease, visibility 0s linear .25s;
+    max-height:calc(100vh - 78px);overflow-y:auto;z-index:1100;
+    box-shadow:0 20px 42px rgba(0,0,0,.55);
+    border-radius:0 0 22px 22px;
+    pointer-events:none;
+  }
+  .main-nav.open{transform:translateY(0);opacity:1;visibility:visible;transition:transform .25s ease, opacity .25s ease;pointer-events:auto;}
+  .main-nav a{
+    width:100%;padding:14px 14px;font-size:15px;letter-spacing:.2px;
+    border-radius:12px;background:rgba(255,255,255,.02);
+    border:1px solid transparent;
+  }
+  .main-nav a:hover,.main-nav a.active{
+    background:rgba(245,181,20,.08);
+    border-color:rgba(245,181,20,.18);
+  }
+  .main-nav a.active::after{display:none;}
+  .nav-toggle{display:flex;}
+  .header-cta{display:none;}
+}
+
+@media (max-width:600px){
+  .header-inner{height:68px;}
+  .nav-backdrop{top:68px;}
+  .main-nav{
+    top:78px;
+    left:10px;
+    right:10px;
+    max-height:calc(100vh - 68px);
+    padding:16px 16px 22px;
+    gap:8px;
+    border-radius:0 0 18px 18px;
+  }
+  .brand-text{font-size:13px;}
+  .brand-mark{width:34px;height:34px;font-size:17px;}
+  .nav-toggle{width:40px;height:40px;border-radius:11px;}
+  .nav-toggle span{width:18px;}
+}
+
+/* =========================================================
+   CONTACT PAGE
+   ========================================================= */
+
+/* ---------- Hero ---------- */
+.contact-hero{
+  position:relative;
+  min-height:640px;
+  display:flex;
+  align-items:center;
+  overflow:hidden;
+  padding:150px 0 90px;
+  background:var(--black);
+}
+.contact-hero::before,
+.contact-hero::after{
+  content:'';position:absolute;pointer-events:none;z-index:0;
+  background:linear-gradient(115deg, transparent 42%, rgba(245,181,20,.10) 50%, transparent 58%);
+}
+.contact-hero::before{top:-20%;left:-15%;width:65%;height:150%;}
+.contact-hero::after{bottom:-30%;right:-12%;width:55%;height:140%;
+  background:linear-gradient(115deg, transparent 42%, rgba(245,181,20,.14) 50%, transparent 58%);}
+
+.contact-hero-bg-car{position:absolute;inset:0 0 0 auto;top:0;right:0;width:62%;height:100%;z-index:1;}
+.contact-hero-bg-car img{
+  width:100%;height:100%;object-fit:cover;object-position:left center;
+  -webkit-mask-image:linear-gradient(90deg, transparent 0%, black 28%);
+  mask-image:linear-gradient(90deg, transparent 0%, black 28%);
+}
+
+.contact-hero .container{position:relative;z-index:5;}
+.contact-hero-copy{max-width:560px;}
+.contact-hero-copy h1{font-size:clamp(38px,5.6vw,64px);margin-bottom:18px;color:#fff;}
+.contact-hero-copy > p{color:var(--grey);font-size:16px;max-width:460px;margin-bottom:34px;line-height:1.85;}
+
+@media(max-width:991px){
+  .contact-hero{min-height:auto;padding:140px 0 60px;}
+  .contact-hero-bg-car{position:relative;width:100%;height:280px;order:-1;margin-bottom:32px;}
+  .contact-hero-bg-car img{
+    object-position:center 30%;
+    -webkit-mask-image:linear-gradient(180deg, transparent 0%, black 30%, black 80%, transparent 100%);
+    mask-image:linear-gradient(180deg, transparent 0%, black 30%, black 80%, transparent 100%);
+  }
+  .contact-hero .container{display:flex;flex-direction:column;}
+  .contact-hero-copy{max-width:100%;text-align:center;margin:0 auto;}
+  .contact-hero-copy .eyebrow{justify-content:center;}
+  .contact-hero-copy > p{margin-left:auto;margin-right:auto;}
+  .contact-hero-copy .btn{margin:0 auto;}
+}
+@media(max-width:480px){
+  .contact-hero-bg-car{height:220px;}
+}
+
+/* ---------- Icon badge (shared: panels, info list, offer items) ---------- */
+.icon-badge{
+  width:40px;height:40px;flex-shrink:0;border-radius:11px;
+  background:rgba(245,181,20,.12);border:1px solid rgba(245,181,20,.3);
+  display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:16px;
+}
+
+/* ---------- Panels: form + contact info ---------- */
+.contact-panels-section{padding-top:0;}
+.contact-panels{display:grid;grid-template-columns:1.3fr 1fr;gap:24px;align-items:start;}
+.panel{
+  background:var(--panel);border:1px solid rgba(245,181,20,.15);border-radius:18px;padding:32px;
+}
+.panel-head{display:flex;align-items:center;gap:14px;margin-bottom:26px;}
+.panel-head h3{margin:0;font-size:20px;font-family:var(--font-body);font-weight:700;}
+.panel-head h3 em{font-style:normal;}
+
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.form-field{position:relative;}
+.form-field.full{grid-column:1/-1;}
+.form-field > i{position:absolute;left:16px;top:16px;color:var(--grey-dim);font-size:14px;pointer-events:none;}
+.form-field input,.form-field textarea{
+  width:100%;padding:14px 16px 14px 42px;border-radius:10px;
+  background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);
+  color:#fff;font-size:14px;font-family:inherit;transition:border-color .2s ease, background .2s ease;
+}
+.form-field textarea{resize:vertical;min-height:120px;}
+.form-field input:focus,.form-field textarea:focus{outline:none;border-color:var(--gold);background:rgba(255,255,255,.05);}
+.form-field input::placeholder,.form-field textarea::placeholder{color:var(--grey-dim);}
+#contactForm .btn{margin-top:18px;}
+
+.info-list{display:flex;flex-direction:column;gap:24px;}
+.info-item{display:flex;gap:14px;align-items:flex-start;}
+.info-item h4{color:#fff;font-size:14.5px;margin-bottom:5px;font-weight:700;font-family:var(--font-body);}
+.info-item p{color:var(--grey);font-size:13.5px;line-height:1.7;margin:0;}
+
+@media(max-width:900px){
+  .contact-panels{grid-template-columns:1fr;}
+}
+@media(max-width:560px){
+  .form-grid{grid-template-columns:1fr;}
+  .panel{padding:24px;}
+}
+
+/* ---------- Map ---------- */
+.map-section{padding:0 0 100px;}
+.map-card{
+  position:relative;border-radius:18px;overflow:hidden;min-height:380px;
+  border:1px solid rgba(245,181,20,.15);
+}
+.map-card > img{
+  width:100%;height:100%;object-fit:cover;position:absolute;inset:0;
+  filter:grayscale(.4) brightness(.5) contrast(1.05);
+}
+.map-pin{
+  position:absolute;top:50%;left:60%;transform:translate(-50%,-100%);
+  color:var(--gold);font-size:36px;z-index:4;
+  filter:drop-shadow(0 10px 16px rgba(0,0,0,.55));
+  animation:pinDrop 2.6s ease-in-out infinite;
+}
+@keyframes pinDrop{0%,100%{transform:translate(-50%,-100%);}50%{transform:translate(-50%,-114%);}}
+
+.map-overlay-card{
+  position:absolute;left:24px;top:24px;bottom:24px;width:280px;z-index:5;
+  background:rgba(5,5,5,.88);backdrop-filter:blur(10px);
+  border:1px solid rgba(245,181,20,.2);border-radius:14px;padding:28px;
+  display:flex;flex-direction:column;justify-content:center;
+}
+.map-overlay-card h3{color:#fff;margin-bottom:10px;font-size:21px;}
+.map-overlay-card h3 em{font-style:normal;}
+.map-overlay-card p{color:var(--grey);font-size:13.5px;margin-bottom:20px;line-height:1.7;}
+.map-overlay-card .btn{width:max-content;}
+
+@media(max-width:700px){
+  .map-card{min-height:auto;}
+  .map-overlay-card{
+    position:static;width:100%;margin:20px;
+  }
+  .map-card > img{position:relative;height:220px;}
+  .map-pin{display:none;}
+}
+
+/* Success banner shown after the contact form is submitted */
+.form-success{
+    display:none;
+    align-items:center;
+    gap:10px;
+    margin-top:16px;
+    padding:14px 16px;
+    border-radius:6px;
+    background:rgba(58,197,105,.12);
+    border:1px solid rgba(58,197,105,.4);
+    color:#6fe396;
+    font-size:13.5px;
+    font-weight:600;
+}
+.form-success.show{display:flex;}
+</style>
+</head>
+<body>
+
+<div id="site-header"></div>
+
+<!-- ============ HERO ============ -->
+<section class="contact-hero">
+
+  <div class="contact-hero-bg-car" data-reveal="right">
+    <img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=1400&q=80&auto=format&fit=crop" alt="Gold performance car with a premium paint finish">
+  </div>
+
+  <div class="container">
+    <div class="contact-hero-copy" data-reveal="left">
+      <p class="eyebrow"><span class="eyebrow-bar"></span>We're Here To Help</p>
+      <h1>Contact <em>Us</em></h1>
+      <p>Have questions about our products or need expert advice? Get in touch with our team. We're ready to help you achieve a superior finish.</p>
+      <a href="#contact-form" class="btn btn-primary">Send us a Message <span>&rarr;</span></a>
+    </div>
+  </div>
+
+</section>
+
+<br><br><br>
+
+<!-- ============ FORM + INFO ============ -->
+<section class="section contact-panels-section" id="contact-form">
+  <div class="container">
+
+    <div class="contact-panels">
+
+      <!-- Form -->
+      <div class="panel" data-reveal="left">
+        <div class="panel-head">
+          <span class="icon-badge"><i class="fas fa-paper-plane"></i></span>
+          <h3>Send us a <em>Message</em></h3>
+        </div>
+
+        <form id="contactForm" onsubmit="return false;">
+          <div class="form-grid">
+
+            <div class="form-field">
+              <i class="fas fa-user"></i>
+              <input type="text" placeholder="Your Name" required>
+            </div>
+
+            <div class="form-field">
+              <i class="fas fa-envelope"></i>
+              <input type="email" placeholder="Email Address" required>
+            </div>
+
+            <div class="form-field">
+              <i class="fas fa-phone-alt"></i>
+              <input type="tel" placeholder="Phone Number">
+            </div>
+
+            <div class="form-field">
+              <i class="fas fa-file-alt"></i>
+              <input type="text" placeholder="Subject">
+            </div>
+
+            <div class="form-field full">
+              <i class="fas fa-pen"></i>
+              <textarea rows="5" placeholder="Your Message" required></textarea>
+            </div>
+
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-block">
+            Send Message <span>&rarr;</span>
+          </button>
+
+          <div class="form-success" id="formSuccess">
+            <i class="fas fa-check-circle"></i>
+            Thanks — your message has been sent. We'll be in touch shortly.
+          </div>
+        </form>
+      </div>
+
+      <!-- Info -->
+      <div class="panel" data-reveal="right">
+        <div class="panel-head">
+          <span class="icon-badge"><i class="fas fa-headset"></i></span>
+          <h3>Contact <em>Information</em></h3>
+        </div>
+
+        <div class="info-list">
+
+          <div class="info-item">
+            <span class="icon-badge"><i class="fas fa-phone-alt"></i></span>
+            <div>
+              <h4>Phone</h4>
+              <p>(555) 123-PAINT (7246)</p>
+            </div>
+          </div>
+
+          <div class="info-item">
+            <span class="icon-badge"><i class="fas fa-envelope"></i></span>
+            <div>
+              <h4>Email</h4>
+              <p>info@autocoat.com</p>
+            </div>
+          </div>
+
+          <div class="info-item">
+            <span class="icon-badge"><i class="fas fa-map-marker-alt"></i></span>
+            <div>
+              <h4>Address</h4>
+              <p>123 Paint Street, Coating City, CC 12345</p>
+            </div>
+          </div>
+
+          <div class="info-item">
+            <span class="icon-badge"><i class="fas fa-clock"></i></span>
+            <div>
+              <h4>Business Hours</h4>
+              <p>Mon – Fri: 8:00 AM – 6:00 PM<br>Saturday: 9:00 AM – 2:00 PM<br>Sunday: Closed</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ MAP ============ -->
+<section class="map-section">
+  <div class="container">
+    <div class="map-card" data-reveal="zoom">
+
+      <img src="https://images.unsplash.com/photo-1524661135-423995f22d0b?w=1600&q=80&auto=format&fit=crop" alt="Aerial map view of Coating City">
+      <i class="fas fa-map-marker-alt map-pin"></i>
+
+      <div class="map-overlay-card">
+        <h3>Visit Our <em>Location</em></h3>
+        <p>123 Paint Street<br>Coating City, CC 12345</p>
+        <a href="https://maps.google.com" target="_blank" rel="noopener" class="btn btn-outline">Get Directions <span>&rarr;</span></a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ WHY CHOOSE ============ -->
+<section class="section offer-section">
+  <div class="container">
+
+    <div class="section-head" data-reveal="up">
+      <h2>Why Professionals Choose <em>Galaxy</em></h2>
+    </div>
+
+    <div class="offer-row stagger">
+
+      <div class="offer-item">
+        <span class="offer-icon"><i class="fas fa-award"></i></span>
+        <div>
+          <h4>Premium Quality</h4>
+          <p>Trusted by professionals for superior results.</p>
+        </div>
+      </div>
+
+      <div class="offer-item">
+        <span class="offer-icon"><i class="fas fa-flask"></i></span>
+        <div>
+          <h4>Advanced Technology</h4>
+          <p>Innovative coatings for every application.</p>
+        </div>
+      </div>
+
+      <div class="offer-item">
+        <span class="offer-icon"><i class="fas fa-headset"></i></span>
+        <div>
+          <h4>Fast Support</h4>
+          <p>Quick responses from our expert team.</p>
+        </div>
+      </div>
+
+      <div class="offer-item">
+        <span class="offer-icon"><i class="fas fa-thumbs-up"></i></span>
+        <div>
+          <h4>Customer Satisfaction</h4>
+          <p>Committed to your success and satisfaction.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div id="site-footer"></div>
+
+<button class="back-to-top" id="backToTop" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
+
+<script>
+  // ===== SCROLL REVEAL (entry + sliding animations) =====
+  const revealEls = document.querySelectorAll('[data-reveal], .stagger');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in-view');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  revealEls.forEach(el => observer.observe(el));
+
+  // Hero reveals immediately on load instead of waiting for scroll
+  window.addEventListener('load', () => {
+    document.querySelectorAll('.contact-hero [data-reveal]').forEach(el => el.classList.add('in-view'));
+  });
+
+  // ===== CONTACT FORM: submit feedback =====
+  const form = document.getElementById('contactForm');
+  const success = document.getElementById('formSuccess');
+  if (form) {
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      success.classList.add('show');
+      form.reset();
+      setTimeout(() => success.classList.remove('show'), 5000);
+    });
+  }
+
+  // ===== SMOOTH SCROLL =====
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', e => {
+      const id = link.getAttribute('href');
+      if (id.length > 1) {
+        const target = document.querySelector(id);
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }
+    });
+  });
+
+  // ===== BACK TO TOP =====
+  const backToTop = document.getElementById('backToTop');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 400) backToTop.classList.add('show');
+    else backToTop.classList.remove('show');
+  });
+  backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+</script>
+<script src="script.js"></script>
+</body>
+</html>
