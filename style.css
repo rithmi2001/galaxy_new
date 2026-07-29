@@ -149,7 +149,7 @@ h3{font-size:18px;margin-bottom:8px;font-family:var(--font-body);font-weight:700
     display:flex;
     align-items:center;
     overflow:hidden;
-    padding:120px 0 80px;
+    padding:0px 0 0;
 }
 
 .hero-video-wrap{
