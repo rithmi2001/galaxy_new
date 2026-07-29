@@ -11,494 +11,268 @@
 <link rel="stylesheet" href="style.css">
 <style>
   /* =========================================================
-     DESIGN TOKENS
-     Industrial black + molten-gold palette, built for an
-     automotive refinishing brand. Oswald (display) reads like
-     workshop signage; Inter (body) keeps specs legible.
+     DESIGN TOKENS - ALTERNATING CONTRAST THEME
   ========================================================== */
-  :root{
-    --black:#0a0a0b;
-    --black-soft:#131315;
-    --black-card:#18181b;
-    --white:#f6f5f2;
-    --gold:#f0a91a;
-    --gold-light:#ffcf5c;
-    --gold-bright:#ffc94d;
-    --grey:#9a9a9c;
-    --grey-dim:#6f6f72;
-    --gray-light:#b8b8bb;
-    --border:rgba(255,255,255,.09);
-    --radius:16px;
-    --font-display:'Oswald', sans-serif;
-    --font-body:'Inter', sans-serif;
+  :root {
+    --black: #080809;
+    --black-soft: #121215;
+    --black-card: #18181c;
+    --white: #ffffff;
+    --white-soft: #f8f9fa;
+    --white-card: #ffffff;
+    
+    --gold: #f0a91a;
+    --gold-light: #ffcf5c;
+    --gold-bright: #ffc94d;
+    
+    --grey-dark: #222226;
+    --grey-muted: #6f6f72;
+    --grey-light: #e5e7eb;
+    --text-dark: #111827;
+    --text-muted: #4b5563;
+    
+    --border-dark: rgba(255, 255, 255, 0.1);
+    --border-light: rgba(0, 0, 0, 0.08);
+    --radius: 16px;
+    
+    --font-display: 'Oswald', sans-serif;
+    --font-body: 'Inter', sans-serif;
   }
 
-  *{margin:0;padding:0;box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
-  body{
-    font-family:var(--font-body);
-    background:var(--black);
-    color:var(--white);
-    line-height:1.5;
-    overflow-x:hidden;
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--font-body);
+    background: var(--black);
+    color: var(--white);
+    line-height: 1.5;
+    overflow-x: hidden;
   }
-  img{max-width:100%;display:block;width:100%;height:100%;object-fit:cover;}
-  a{text-decoration:none;color:inherit;}
-  ul{list-style:none;}
-  button{font-family:inherit;cursor:pointer;border:none;}
-  h1,h2,h3,h4{font-family:var(--font-display);letter-spacing:.3px;}
+  img { max-width: 100%; display: block; width: 100%; height: 100%; object-fit: cover; }
+  a { text-decoration: none; color: inherit; }
+  ul { list-style: none; }
+  button { font-family: inherit; cursor: pointer; border: none; }
+  h1, h2, h3, h4 { font-family: var(--font-display); letter-spacing: .3px; }
 
-  /* ===== ENTRY / SCROLL ANIMATIONS ===== */
-  .fade-up{opacity:0;transform:translateY(36px);transition:opacity .8s ease, transform .8s ease;}
-  .fade-up.in-view{opacity:1;transform:translateY(0);}
-  .fade-in{opacity:0;transition:opacity .9s ease;}
-  .fade-in.in-view{opacity:1;}
-  .zoom-in{opacity:0;transform:scale(.88);transition:opacity .7s ease, transform .7s ease;}
-  .zoom-in.in-view{opacity:1;transform:scale(1);}
-  .stagger > *{opacity:0;transform:translateY(28px);transition:opacity .6s ease, transform .6s ease;}
-  .stagger.in-view > *{opacity:1;transform:translateY(0);}
-  .stagger.in-view > *:nth-child(1){transition-delay:.05s;}
-  .stagger.in-view > *:nth-child(2){transition-delay:.12s;}
-  .stagger.in-view > *:nth-child(3){transition-delay:.19s;}
-  .stagger.in-view > *:nth-child(4){transition-delay:.26s;}
-  .stagger.in-view > *:nth-child(5){transition-delay:.33s;}
-  .stagger.in-view > *:nth-child(6){transition-delay:.40s;}
-  .stagger.in-view > *:nth-child(7){transition-delay:.47s;}
-  .stagger.in-view > *:nth-child(8){transition-delay:.54s;}
+  /* ===== ANIMATIONS ===== */
+  .fade-up { opacity: 0; transform: translateY(36px); transition: opacity .8s ease, transform .8s ease; }
+  .fade-up.in-view { opacity: 1; transform: translateY(0); }
+  .fade-in { opacity: 0; transition: opacity .9s ease; }
+  .fade-in.in-view { opacity: 1; }
+  .zoom-in { opacity: 0; transform: scale(.88); transition: opacity .7s ease, transform .7s ease; }
+  .zoom-in.in-view { opacity: 1; transform: scale(1); }
+  .stagger > * { opacity: 0; transform: translateY(28px); transition: opacity .6s ease, transform .6s ease; }
+  .stagger.in-view > * { opacity: 1; transform: translateY(0); }
+  .stagger.in-view > *:nth-child(1) { transition-delay: .05s; }
+  .stagger.in-view > *:nth-child(2) { transition-delay: .12s; }
+  .stagger.in-view > *:nth-child(3) { transition-delay: .19s; }
+  .stagger.in-view > *:nth-child(4) { transition-delay: .26s; }
+  .stagger.in-view > *:nth-child(5) { transition-delay: .33s; }
+  .stagger.in-view > *:nth-child(6) { transition-delay: .40s; }
+  .stagger.in-view > *:nth-child(7) { transition-delay: .47s; }
+  .stagger.in-view > *:nth-child(8) { transition-delay: .54s; }
 
-  @media (prefers-reduced-motion: reduce){
-    .fade-up,.fade-in,.zoom-in,.stagger > *{transition:none !important;opacity:1 !important;transform:none !important;}
-    *{animation-duration:.001s !important;}
-  }
-
-  @keyframes heroPop{
-    from{opacity:0;transform:translateY(40px) scale(.97);}
-    to{opacity:1;transform:translateY(0) scale(1);}
-  }
-  @keyframes floatPulse{
-    0%,100%{transform:translateY(0);}
-    50%{transform:translateY(-6px);}
+  @media (prefers-reduced-motion: reduce) {
+    .fade-up, .fade-in, .zoom-in, .stagger > * { transition: none !important; opacity: 1 !important; transform: none !important; }
   }
 
-  /* ===== SHARED EYEBROW ===== */
-  .eyebrow{
-    display:inline-flex;align-items:center;gap:10px;
-    color:var(--gold);font-weight:700;font-size:12.5px;letter-spacing:2px;
-    text-transform:uppercase;margin-bottom:18px;
+  @keyframes heroPop {
+    from { opacity: 0; transform: translateY(40px) scale(.97); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
   }
-  .eyebrow-bar{width:32px;height:2px;background:var(--gold);display:inline-block;}
+  @keyframes floatPulse {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+  }
 
   /* ===== BUTTONS ===== */
-  .btn{
-    display:inline-flex;align-items:center;gap:8px;
-    padding:14px 28px;border-radius:8px;font-weight:600;font-size:14.5px;
-    transition:all .25s ease;white-space:nowrap;cursor:pointer;
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 14px 28px; border-radius: 8px; font-weight: 600; font-size: 14.5px;
+    transition: all .25s ease; white-space: nowrap; cursor: pointer;
   }
-  .btn-gold,.btn-primary{background:var(--gold);color:#1a1300;border:none;}
-  .btn-gold:hover,.btn-primary:hover{background:var(--gold-light);transform:translateY(-3px);box-shadow:0 10px 24px rgba(240,169,26,.35);}
-  .btn-outline{background:transparent;color:var(--white);border:1px solid #4a4a4d;}
-  .btn-outline:hover{border-color:var(--gold);color:var(--gold);transform:translateY(-3px);}
+  .btn-gold, .btn-primary { background: var(--gold); color: #1a1300; border: none; }
+  .btn-gold:hover, .btn-primary:hover { background: var(--gold-light); transform: translateY(-3px); box-shadow: 0 10px 24px rgba(240,169,26,.35); }
+  .btn-outline { background: transparent; color: inherit; border: 1px solid currentColor; }
+  .btn-outline:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-3px); }
 
-  /* ===== PRODUCT HERO ===== */
-  .product-page-shell{
-    padding-top:110px;
-    background:
-      radial-gradient(1100px 500px at 85% -10%, rgba(240,169,26,.10), transparent 60%),
-      var(--black);
-    color:var(--white);
+  /* ===== SECTION 1: BLACK HERO ===== */
+  .section-dark-1 {
+    padding-top: 110px;
+    background: radial-gradient(1100px 500px at 85% -10%, rgba(240,169,26,.12), transparent 60%), var(--black);
+    color: var(--white);
+    padding-bottom: 60px;
   }
-  .product-hero{
-    max-width:1280px;
-    margin:0 auto;
-    padding:0 48px 36px;
+  .product-hero { max-width: 1280px; margin: 0 auto; padding: 0 48px 36px; }
+  .product-hero-grid { display: grid; grid-template-columns: 1.15fr .85fr; gap: 24px; align-items: stretch; }
+  .product-hero-panel, .product-hero-visual { border: 1px solid var(--border-dark); border-radius: 24px; overflow: hidden; min-height: 320px; }
+  .product-hero-panel {
+    background: linear-gradient(135deg, rgba(245,181,20,.14), rgba(255,255,255,.03) 42%, rgba(255,255,255,.02));
+    padding: 44px; display: flex; flex-direction: column; justify-content: center; position: relative; animation: heroPop .8s ease both;
   }
-  .product-hero-grid{
-    display:grid;
-    grid-template-columns:1.15fr .85fr;
-    gap:24px;
-    align-items:stretch;
-  }
-  .product-hero-panel,
-  .product-hero-visual{
-    border:1px solid var(--border);
-    border-radius:24px;
-    overflow:hidden;
-    min-height:320px;
-  }
-  .product-hero-panel{
-    background:linear-gradient(135deg, rgba(245,181,20,.14), rgba(255,255,255,.03) 42%, rgba(255,255,255,.02));
-    padding:44px;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    position:relative;
-    animation:heroPop .8s ease both;
-  }
-  .product-hero-panel::after{
-    content:"";
-    position:absolute;
-    inset:auto -10% -32% auto;
-    width:260px;
-    height:260px;
-    border-radius:50%;
-    background:radial-gradient(circle, rgba(245,181,20,.18), transparent 68%);
-    pointer-events:none;
-  }
-  .product-hero-panel h1{
-    font-size:clamp(34px,5vw,58px);
-    font-weight:700;
-    line-height:1.08;
-    margin-bottom:18px;
-    max-width:12ch;
-  }
-  .product-hero-panel p{
-    color:var(--grey);
-    font-size:16px;
-    max-width:560px;
-  }
-  .product-hero-actions{
-    display:flex;
-    gap:14px;
-    flex-wrap:wrap;
-    margin-top:26px;
-  }
-  .product-hero-stats{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:14px;
-    margin-top:30px;
-  }
-  .product-hero-stat{
-    background:rgba(10,10,10,.45);
-    border:1px solid var(--border);
-    border-radius:14px;
-    padding:16px 18px;
-  }
-  .product-hero-stat strong{
-    display:block;
-    font-family:var(--font-display);
-    font-size:26px;
-    color:var(--gold-bright);
-    margin-bottom:4px;
-  }
-  .product-hero-stat span{
-    color:var(--grey-dim);
-    font-size:12px;
-    text-transform:uppercase;
-    letter-spacing:1px;
-  }
-  .product-hero-visual{
-    position:relative;
-    background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));
-  }
-  .product-hero-visual img{
-    width:100%;height:100%;object-fit:cover;
-    transition:transform 8s ease;
-  }
-  .product-hero-visual:hover img{transform:scale(1.08);}
-  .product-hero-visual::after{
-    content:"Featured range";
-    position:absolute;
-    left:18px;
-    bottom:18px;
-    padding:10px 14px;
-    background:rgba(0,0,0,.55);
-    backdrop-filter:blur(4px);
-    border:1px solid var(--border);
-    border-radius:999px;
-    font-size:12px;
-    letter-spacing:1px;
-    text-transform:uppercase;
+  .product-hero-panel h1 { font-size: clamp(34px, 5vw, 58px); font-weight: 700; line-height: 1.08; margin-bottom: 18px; max-width: 12ch; }
+  .product-hero-panel p { color: #9a9a9c; font-size: 16px; max-width: 560px; }
+  .product-hero-actions { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 26px; }
+  .product-hero-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 30px; }
+  .product-hero-stat { background: rgba(10,10,10,.45); border: 1px solid var(--border-dark); border-radius: 14px; padding: 16px 18px; }
+  .product-hero-stat strong { display: block; font-family: var(--font-display); font-size: 26px; color: var(--gold-bright); margin-bottom: 4px; }
+  .product-hero-stat span { color: var(--grey-muted); font-size: 12px; text-transform: uppercase; letter-spacing: 1px; }
+  .product-hero-visual { position: relative; background: rgba(255,255,255,.03); }
+  .product-hero-visual img { transition: transform 8s ease; }
+  .product-hero-visual:hover img { transform: scale(1.08); }
+  .product-hero-visual::after {
+    content: "Featured range"; position: absolute; left: 18px; bottom: 18px; padding: 10px 14px;
+    background: rgba(0,0,0,.65); backdrop-filter: blur(4px); border: 1px solid var(--border-dark);
+    border-radius: 999px; font-size: 12px; letter-spacing: 1px; text-transform: uppercase;
   }
 
-  /* ===== PAGE WRAPPER / SIDEBAR + PROMO ===== */
-  .page-content{max-width:1280px;margin:0 auto;padding:0 48px 0;}
-  .main-grid{
-    display:grid;
-    grid-template-columns:280px 1fr;
-    gap:24px;
-    align-items:start;
+  /* ===== SIDEBAR & PROMO (PART OF SECTION 1 DARK) ===== */
+  .page-content { max-width: 1280px; margin: 0 auto; padding: 0 48px; }
+  .main-grid { display: grid; grid-template-columns: 280px 1fr; gap: 24px; align-items: start; }
+  .sidebar { background: var(--black-card); border: 1px solid var(--border-dark); border-radius: var(--radius); overflow: visible; position: relative; z-index: 20; }
+  .sidebar-head { display: flex; justify-content: space-between; align-items: center; padding: 18px 20px; font-weight: 700; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; color: var(--gold); border-bottom: 1px solid var(--border-dark); }
+  .sidebar-item { position: relative; }
+  .sidebar-link { display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; color: #b8b8bb; border-bottom: 1px solid var(--border-dark); transition: .2s; font-size: 14px; }
+  .sidebar-link:hover, .sidebar-link:focus-visible { background: #222226; color: var(--gold); padding-left: 26px; }
+  .sidebar-link.active { background: var(--gold); color: #161200; font-weight: 600; }
+  .sidebar-more { display: block; padding: 16px 20px; color: var(--gold); font-weight: 700; font-size: 14px; }
+  .submenu {
+    position: absolute; left: calc(100% + 4px); top: 0; width: 300px; background: #111113;
+    border: 1px solid var(--border-dark); border-radius: 8px; padding: 18px; display: grid;
+    grid-template-columns: 1fr 1fr; gap: 10px 16px; opacity: 0; visibility: hidden;
+    transform: translateX(10px); transition: .25s; z-index: 50; box-shadow: 0 8px 32px rgba(0,0,0,0.5);
   }
+  .sidebar-item:hover .submenu, .sidebar-item:focus-within .submenu { opacity: 1; visibility: visible; transform: translateX(0); }
+  .submenu a { color: #b8b8bb; font-size: 13px; padding: 4px 0; transition: color .2s; }
+  .submenu a:hover { color: var(--gold); padding-left: 4px; }
 
-  .sidebar{
-    background:var(--black-card);
-    border:1px solid var(--border);
-    border-radius:var(--radius);
-    overflow:visible;
-    position:relative;
-    z-index:20;
-    animation:heroPop .8s ease .1s both;
-  }
-  .sidebar-head{
-    display:flex;justify-content:space-between;align-items:center;
-    padding:18px 20px;font-weight:700;font-size:14px;
-    text-transform:uppercase;letter-spacing:1px;color:var(--gold);
-    border-bottom:1px solid var(--border);
-  }
-  .sidebar-item{position:relative;}
-  .sidebar-link{
-    display:flex;justify-content:space-between;align-items:center;
-    padding:15px 20px;color:var(--gray-light);
-    border-bottom:1px solid var(--border);
-    transition:background .2s,color .2s, padding-left .2s;font-size:14px;
-  }
-  .sidebar-link:hover,.sidebar-link:focus-visible{background:#222226;color:var(--gold);padding-left:26px;}
-  .sidebar-link.active{background:var(--gold);color:#161200;font-weight:600;}
-  .sidebar-more{
-    display:block;padding:16px 20px;color:var(--gold);font-weight:700;font-size:14px;
-    transition:opacity .2s;
-  }
-  .sidebar-more:hover{opacity:.8;}
-  .submenu{
-    position:absolute;
-    left:calc(100% + 4px);
-    top:0;
-    width:300px;
-    background:#111113;
-    border:1px solid var(--border);
-    border-radius:8px;
-    padding:18px;
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:10px 16px;
-    opacity:0;
-    visibility:hidden;
-    transform:translateX(10px);
-    transition:opacity .25s, transform .25s, visibility .25s;
-    z-index:50;
-    box-shadow:0 8px 32px rgba(0,0,0,0.5);
-  }
-  .sidebar-item:hover .submenu,
-  .sidebar-item:focus-within .submenu{
-    opacity:1;visibility:visible;transform:translateX(0);
-  }
-  .submenu a{
-    color:var(--gray-light);font-size:13px;padding:4px 0;
-    transition:color .2s;
-  }
-  .submenu a:hover{color:var(--gold);padding-left:4px;}
+  .promo { position: relative; height: 460px; border-radius: var(--radius); overflow: hidden; background: #111113; border: 1px solid var(--border-dark); }
+  .slide { position: absolute; inset: 0; opacity: 0; transform: scale(1.06); transition: opacity 1s ease, transform 6s ease; z-index: 1; }
+  .slide.active { opacity: 1; transform: scale(1); z-index: 2; }
+  .slide-overlay { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(0,0,0,.85) 0%, rgba(0,0,0,.45) 45%, rgba(0,0,0,.1) 100%); }
+  .promo-content { position: absolute; top: 50%; left: 52px; transform: translateY(-50%); width: 400px; z-index: 5; }
+  .promo-eyebrow { color: var(--gold); font-size: 12px; letter-spacing: 2px; font-weight: 700; margin-bottom: 16px; display: block; text-transform: uppercase; }
+  .promo-content h2 { font-size: 42px; line-height: 1.15; margin-bottom: 16px; font-weight: 700; }
+  .promo-content h2 span { color: var(--gold); }
+  .promo-content p { color: #ddd; font-size: 15px; margin-bottom: 26px; }
+  .slider-dots { position: absolute; bottom: 22px; left: 50%; transform: translateX(-50%); display: flex; gap: 8px; z-index: 10; }
+  .dot { width: 10px; height: 10px; border-radius: 50%; background: #666; cursor: pointer; transition: .3s; border: none; }
+  .dot.active { background: var(--gold); transform: scale(1.3); }
 
-  .promo{
-    position:relative;
-    height:460px;
-    border-radius:var(--radius);
-    overflow:hidden;
-    background:#111113;
-    animation:heroPop .9s ease .15s both;
+  /* ===== SECTION 2: WHITE BACKGROUND (CATEGORIES) ===== */
+  .section-white-1 {
+    background: var(--white);
+    color: var(--text-dark);
+    padding: 80px 48px;
+    border-bottom: 1px solid var(--border-light);
   }
-  .slide{position:absolute;inset:0;opacity:0;transform:scale(1.06);transition:opacity 1s ease, transform 6s ease;z-index:1;}
-  .slide.active{opacity:1;transform:scale(1);z-index:2;}
-  .slide img{width:100%;height:100%;object-fit:cover;}
-  .slide-overlay{
-    position:absolute;inset:0;
-    background:linear-gradient(90deg,rgba(0,0,0,.85) 0%,rgba(0,0,0,.45) 45%,rgba(0,0,0,.1) 100%);
-  }
-  .promo-content{
-    position:absolute;top:50%;left:52px;
-    transform:translateY(-50%);
-    width:400px;z-index:5;
-  }
-  .promo-content .promo-eyebrow,
-  .promo-content h2,
-  .promo-content p,
-  .promo-content .btn{
-    opacity:0;transform:translateY(20px);
-    transition:opacity .7s ease, transform .7s ease;
-  }
-  .slide.active .promo-content .promo-eyebrow{transition-delay:.2s;opacity:1;transform:translateY(0);}
-  .slide.active .promo-content h2{transition-delay:.35s;opacity:1;transform:translateY(0);}
-  .slide.active .promo-content p{transition-delay:.5s;opacity:1;transform:translateY(0);}
-  .slide.active .promo-content .btn{transition-delay:.65s;opacity:1;transform:translateY(0);}
-  .promo-eyebrow{
-    color:var(--gold);font-size:12px;letter-spacing:2px;font-weight:700;
-    margin-bottom:16px;display:block;text-transform:uppercase;
-  }
-  .promo-content h2{font-size:42px;line-height:1.15;margin-bottom:16px;font-weight:700;}
-  .promo-content h2 span{color:var(--gold);}
-  .promo-content p{color:#ddd;font-size:15px;margin-bottom:26px;}
-  .slider-dots{
-    position:absolute;bottom:22px;left:50%;
-    transform:translateX(-50%);
-    display:flex;gap:8px;z-index:10;
-  }
-  .dot{
-    width:10px;height:10px;border-radius:50%;background:#666;
-    cursor:pointer;transition:background .3s, transform .3s;
-    border:none;
-  }
-  .dot.active{background:var(--gold);transform:scale(1.3);}
+  .section-head-dark { text-align: center; margin-bottom: 36px; }
+  .eyebrow-dark { color: var(--text-dark); font-weight: 800; font-size: 13px; letter-spacing: 2px; text-transform: uppercase; display: flex; align-items: center; justify-content: center; gap: 14px; margin-bottom: 10px; }
+  .eyebrow-dark::before, .eyebrow-dark::after { content: ""; width: 50px; height: 2px; background: var(--gold); }
+  .section-head-dark h2 { font-size: 38px; font-weight: 700; color: var(--text-dark); }
 
-  /* ===== GENERIC SECTIONS ===== */
-  .section{max-width:1280px;margin:0 auto;padding:70px 48px;}
-  .section-head{text-align:center;margin-bottom:36px;}
-  .section-eyebrow{
-    color:var(--gold);font-weight:700;font-size:12px;letter-spacing:2px;
-    display:flex;align-items:center;justify-content:center;gap:14px;margin-bottom:10px;
-    text-transform:uppercase;
+  .category-circles { display: flex; justify-content: center; align-items: center; gap: 34px; flex-wrap: wrap; margin-top: 40px; }
+  .circle-card {
+    width: 140px; height: 140px; border-radius: 50%; background: var(--white-soft);
+    border: 2px solid var(--grey-light); display: flex; flex-direction: column; justify-content: center; align-items: center;
+    position: relative; cursor: pointer; transition: .4s cubic-bezier(.2,.8,.2,1); overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
   }
-  .section-eyebrow::before,.section-eyebrow::after{content:"";width:50px;height:1px;background:var(--border);}
-  .section-head h2{font-size:32px;font-weight:700;}
+  .circle-card img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; opacity: .7; transition: .4s; }
+  .circle-card span { position: relative; z-index: 2; color: #fff; font-weight: 700; text-align: center; font-size: 14px; text-shadow: 0 2px 8px rgba(0,0,0,0.9); }
+  .circle-card::after { content: ""; position: absolute; inset: 0; background: rgba(0,0,0,.35); transition: .4s; }
+  .circle-card:hover { transform: translateY(-10px) scale(1.05); border-color: var(--gold); box-shadow: 0 18px 36px rgba(0,0,0,.15); }
+  .circle-card:hover img { opacity: .9; transform: scale(1.1); }
 
-  /* ===== CATEGORY CIRCLES ===== */
-  .category-circles{
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    gap:34px;
-    flex-wrap:wrap;
-    margin-top:50px;
+  /* ===== SECTION 3: BLACK BACKGROUND (PRODUCTS) ===== */
+  .section-dark-2 {
+    background: var(--black);
+    color: var(--white);
+    padding: 80px 48px;
   }
-  .circle-card{
-    width:130px;height:130px;border-radius:50%;
-    background:var(--black-card);
-    border:1px solid var(--border);
-    display:flex;flex-direction:column;justify-content:center;align-items:center;
-    position:relative;cursor:pointer;
-    transition:.4s cubic-bezier(.2,.8,.2,1);
-    overflow:hidden;
-  }
-  .circle-card img{
-    width:100%;height:100%;object-fit:cover;position:absolute;inset:0;
-    opacity:.55;transition:.4s;
-  }
-  .circle-card span{
-    position:relative;z-index:2;
-    color:#fff;font-weight:700;text-align:center;font-size:14px;
-    text-shadow:0 2px 8px rgba(0,0,0,.8);
-  }
-  .circle-card::after{
-    content:"";position:absolute;inset:0;background:rgba(12,12,13,.25);
-    transition:.4s;
-  }
-  .circle-card:hover{
-    transform:translateY(-10px) scale(1.05);
-    border-color:var(--gold);
-    box-shadow:0 18px 36px rgba(240,169,26,.25);
-  }
-  .circle-card:hover img{opacity:.85;transform:scale(1.1);}
-  .circle-card:hover::after{background:rgba(240,169,26,.18);}
+  .container { max-width: 1280px; margin: auto; }
+  .products-top { display: flex; justify-content: space-between; align-items: center; gap: 30px; margin-bottom: 45px; flex-wrap: wrap; }
+  .products-title h2 { font-size: 40px; font-weight: 700; color: #fff; }
+  .products-title h2 span { color: var(--gold); }
+  .section-kicker { display: inline-block; color: var(--gold); text-transform: uppercase; letter-spacing: 2px; font-size: 13px; font-weight: 700; margin-bottom: 10px; }
+  .product-tabs { display: flex; gap: 12px; flex-wrap: wrap; }
+  .tab-btn { background: #1b1b1d; border: 1px solid #2d2d30; color: #ddd; padding: 12px 26px; border-radius: 40px; font-size: 14px; font-weight: 600; cursor: pointer; transition: .3s; }
+  .tab-btn:hover, .tab-btn.active { background: var(--gold); color: #161200; border-color: var(--gold); transform: translateY(-2px); }
+  .product-panel { display: none; }
+  .product-panel.active { display: block; }
+  .products-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px; }
+  .premium-product-card { background: var(--black-card); border: 1px solid var(--border-dark); border-radius: 14px; overflow: hidden; transition: .4s; position: relative; }
+  .premium-product-card:hover { transform: translateY(-10px); border-color: var(--gold); box-shadow: 0 20px 40px rgba(0,0,0,.5); }
+  .premium-product-image { position: relative; height: 250px; overflow: hidden; background: #111113; }
+  .premium-product-image img { width: 100%; height: 100%; object-fit: cover; transition: .5s; }
+  .premium-product-card:hover img { transform: scale(1.1); }
+  .stock-badge { position: absolute; top: 15px; left: 15px; z-index: 5; padding: 7px 15px; border-radius: 30px; font-size: 11px; font-weight: 700; text-transform: uppercase; }
+  .in-stock { background: #2ecc71; color: #fff; }
+  .low-stock { background: #f39c12; color: #fff; }
+  .out-stock { background: #e74c3c; color: #fff; }
+  .premium-product-content { padding: 24px; }
+  .home-product-category { color: var(--gold); font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; }
+  .premium-product-content h3 { color: #fff; font-size: 20px; font-weight: 600; margin-bottom: 14px; line-height: 1.4; }
+  .product-short { color: #b8b8b8; font-size: 14px; line-height: 1.8; margin-bottom: 22px; }
+  .home-product-bottom { display: flex; justify-content: space-between; align-items: center; gap: 15px; }
+  .home-product-price { font-size: 26px; font-weight: 800; font-family: var(--font-display); color: var(--gold); }
+  .home-product-link { display: inline-flex; align-items: center; gap: 8px; background: var(--gold); color: #161200; text-decoration: none; padding: 11px 20px; border-radius: 40px; font-weight: 700; transition: .3s; }
+  .home-product-link:hover { background: var(--gold-light); transform: translateX(5px); }
 
-  .center-btn{text-align:center;}
+  /* ===== SECTION 4: WHITE BACKGROUND (WHY CHOOSE US) ===== */
+  .section-white-2 {
+    background: var(--white-soft);
+    color: var(--text-dark);
+    padding: 80px 48px;
+    border-top: 1px solid var(--border-light);
+    border-bottom: 1px solid var(--border-light);
+  }
+  .why-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-top: 50px; }
+  .why-card {
+    background: var(--white); border: 1px solid var(--border-light); border-radius: var(--radius);
+    padding: 36px 24px; text-align: center; transition: .35s;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+  }
+  .why-card:hover { transform: translateY(-8px); border-color: var(--gold); box-shadow: 0 15px 35px rgba(0,0,0,0.08); }
+  .why-icon {
+    width: 64px; height: 64px; border-radius: 50%; background: #111;
+    display: flex; align-items: center; justify-content: center; margin: 0 auto 18px;
+    font-size: 22px; color: var(--gold); animation: floatPulse 3.5s ease-in-out infinite;
+  }
+  .why-card h4 { font-size: 18px; font-weight: 700; margin-bottom: 10px; color: var(--text-dark); }
+  .why-card p { font-size: 14px; color: var(--text-muted); line-height: 1.6; }
 
-  /* ===== FEATURED PRODUCTS ===== */
-  .products-section{padding:40px 48px 70px;}
-  .container{max-width:1280px;margin:auto;}
-  .products-top{
-    display:flex;justify-content:space-between;align-items:center;
-    gap:30px;margin-bottom:45px;flex-wrap:wrap;
+  /* ===== SECTION 5: BLACK BACKGROUND (CONTACT FORM) ===== */
+  .section-dark-3 {
+    background: var(--black);
+    color: var(--white);
+    padding: 80px 48px;
   }
-  .products-title h2{font-size:40px;font-weight:700;color:#fff;}
-  .products-title h2 span{color:var(--gold);}
-  .section-kicker{
-    display:inline-block;color:var(--gold);text-transform:uppercase;
-    letter-spacing:2px;font-size:13px;font-weight:700;margin-bottom:10px;
+  .msg-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; max-width: 1280px; margin: 0 auto; }
+  .msg-form { background: var(--black-card); border: 1px solid var(--border-dark); border-radius: var(--radius); padding: 40px; }
+  .msg-form h3 { font-size: 22px; font-weight: 600; margin-bottom: 24px; color: var(--white); }
+  .msg-form input, .msg-form textarea {
+    width: 100%; background: var(--black-soft); border: 1px solid var(--border-dark);
+    border-radius: 8px; padding: 14px 18px; margin-bottom: 16px; color: var(--white);
+    font-size: 14px; font-family: inherit; transition: border-color .2s; outline: none;
   }
-  .product-tabs{display:flex;gap:12px;flex-wrap:wrap;}
-  .tab-btn{
-    background:#1b1b1d;border:1px solid #2d2d30;color:#ddd;
-    padding:12px 26px;border-radius:40px;font-size:14px;font-weight:600;
-    cursor:pointer;transition:.3s;
-  }
-  .tab-btn:hover,.tab-btn.active{
-    background:var(--gold);color:#161200;border-color:var(--gold);transform:translateY(-2px);
-  }
-  .product-panel{display:none;}
-  .product-panel.active{display:block;}
-  .products-grid{
-    display:grid;grid-template-columns:repeat(4,1fr);gap:28px;
-  }
-  .premium-product-card{
-    background:var(--black-card);border:1px solid #2d2d30;border-radius:14px;
-    overflow:hidden;transition:.4s;position:relative;
-  }
-  .premium-product-card:hover{
-    transform:translateY(-10px);border-color:var(--gold);
-    box-shadow:0 20px 40px rgba(0,0,0,.35);
-  }
-  .premium-product-image{position:relative;height:250px;overflow:hidden;background:#111113;}
-  .premium-product-image img{width:100%;height:100%;object-fit:cover;transition:.5s;}
-  .premium-product-card:hover img{transform:scale(1.1);}
-  .stock-badge{
-    position:absolute;top:15px;left:15px;z-index:5;
-    padding:7px 15px;border-radius:30px;font-size:11px;font-weight:700;text-transform:uppercase;
-  }
-  .in-stock{background:#2ecc71;color:#fff;}
-  .low-stock{background:#f39c12;color:#fff;}
-  .out-stock{background:#e74c3c;color:#fff;}
-  .premium-product-content{padding:24px;}
-  .home-product-category{
-    color:var(--gold);font-size:12px;font-weight:700;text-transform:uppercase;
-    letter-spacing:1px;margin-bottom:12px;
-  }
-  .premium-product-content h3{color:#fff;font-size:20px;font-weight:600;margin-bottom:14px;line-height:1.4;}
-  .product-short{color:#b8b8b8;font-size:14px;line-height:1.8;margin-bottom:22px;}
-  .home-product-bottom{display:flex;justify-content:space-between;align-items:center;gap:15px;}
-  .home-product-price{font-size:26px;font-weight:800;font-family:var(--font-display);color:var(--gold);}
-  .home-product-link{
-    display:inline-flex;align-items:center;gap:8px;background:var(--gold);color:#161200;
-    text-decoration:none;padding:11px 20px;border-radius:40px;font-weight:700;transition:.3s;
-  }
-  .home-product-link:hover{background:var(--gold-light);transform:translateX(5px);}
-  .home-product-link i{transition:.3s;}
-  .home-product-link:hover i{transform:translateX(5px);}
-
-  /* ===== WHY CHOOSE US ===== */
-  .why-grid{
-    display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:50px;
-  }
-  .why-card{
-    background:var(--black-card);border:1px solid var(--border);border-radius:var(--radius);
-    padding:32px 24px;text-align:center;transition:.35s;
-  }
-  .why-card:hover{transform:translateY(-8px);border-color:var(--gold);}
-  .why-icon{
-    width:60px;height:60px;border-radius:50%;background:rgba(240,169,26,.12);
-    display:flex;align-items:center;justify-content:center;margin:0 auto 18px;
-    font-size:22px;color:var(--gold);
-    animation:floatPulse 3.5s ease-in-out infinite;
-  }
-  .why-card h4{font-size:16px;font-weight:600;margin-bottom:8px;font-family:var(--font-body);}
-  .why-card p{font-size:13.5px;color:var(--gray-light);line-height:1.6;}
-
-  /* ===== MESSAGE FORM ===== */
-  .message-section{max-width:1280px;margin:0 auto;padding:0 48px 80px;}
-  .msg-wrap{display:grid;grid-template-columns:1fr 1fr;gap:24px;}
-  .msg-form{
-    background:var(--black-card);border:1px solid var(--border);border-radius:var(--radius);
-    padding:34px;
-  }
-  .msg-form h3{font-size:19px;font-weight:600;margin-bottom:20px;font-family:var(--font-body);}
-  .msg-form input,.msg-form textarea{
-    width:100%;background:var(--black-soft);border:1px solid var(--border);
-    border-radius:8px;padding:13px 16px;margin-bottom:12px;color:var(--white);
-    font-size:14px;font-family:inherit;transition:border-color .2s;outline:none;
-  }
-  .msg-form input:focus,.msg-form textarea:focus{border-color:var(--gold);}
-  .msg-form input::placeholder,.msg-form textarea::placeholder{color:var(--grey);}
-  .msg-form textarea{resize:vertical;min-height:120px;}
-  .spray-visual{
-    border-radius:var(--radius);overflow:hidden;
-    background:linear-gradient(135deg,#2b2200,#0c0c0d 70%);
-    min-height:300px;position:relative;
-  }
-  .spray-visual img{width:100%;height:100%;object-fit:cover;transition:transform 6s ease;}
-  .spray-visual:hover img{transform:scale(1.08);}
+  .msg-form input:focus, .msg-form textarea:focus { border-color: var(--gold); }
+  .msg-form input::placeholder, .msg-form textarea::placeholder { color: var(--grey-muted); }
+  .msg-form textarea { resize: vertical; min-height: 120px; }
+  .spray-visual { border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border-dark); min-height: 300px; position: relative; }
 
   /* ===== SCROLL TOP BUTTON ===== */
-  #scrollTop{
-    position:fixed;bottom:26px;right:26px;width:46px;height:46px;border-radius:50%;
-    background:var(--gold);color:#161200;display:flex;align-items:center;justify-content:center;
-    font-size:18px;cursor:pointer;opacity:0;visibility:hidden;transition:.3s;z-index:200;
-    box-shadow:0 8px 20px rgba(0,0,0,.4);
+  #scrollTop {
+    position: fixed; bottom: 26px; right: 26px; width: 46px; height: 46px; border-radius: 50%;
+    background: var(--gold); color: #161200; display: flex; align-items: center; justify-content: center;
+    font-size: 18px; cursor: pointer; opacity: 0; visibility: hidden; transition: .3s; z-index: 200;
+    box-shadow: 0 8px 20px rgba(0,0,0,.4);
   }
-  #scrollTop.show{opacity:1;visibility:visible;}
-  #scrollTop:hover{background:var(--gold-light);transform:translateY(-3px);}
-  #scrollTop:focus-visible,
-  a:focus-visible,
-  button:focus-visible{outline:2px solid var(--gold);outline-offset:2px;}
+  #scrollTop.show { opacity: 1; visibility: visible; }
+  #scrollTop:hover { background: var(--gold-light); transform: translateY(-3px); }
 
   /* =========================================================
-     RESPONSIVE
+     RESPONSIVE DESIGN
   ========================================================== */
   @media(max-width:1200px){
     .products-grid{grid-template-columns:repeat(3,1fr);}
@@ -506,50 +280,28 @@
   }
   @media(max-width:1100px){
     .product-hero-grid{grid-template-columns:1fr;}
-    .product-hero-visual{min-height:220px;}
     .main-grid{grid-template-columns:1fr;}
     .submenu{left:0;top:100%;width:100%;}
     .msg-wrap{grid-template-columns:1fr;}
-    .spray-visual{min-height:220px;}
-    .product-hero,
-    .page-content,
-    .section,
-    .message-section{padding-left:28px;padding-right:28px;}
+    .section-white-1, .section-dark-2, .section-white-2, .section-dark-3 { padding-left:28px; padding-right:28px; }
   }
   @media(max-width:992px){
     .products-top{flex-direction:column;align-items:flex-start;}
     .products-grid{grid-template-columns:repeat(2,1fr);}
-    .products-title h2{font-size:32px;}
     .promo{height:420px;}
   }
   @media(max-width:700px){
-    .product-page-shell{padding-top:88px;}
+    .section-dark-1{padding-top:88px;}
     .product-hero{padding-left:20px;padding-right:20px;}
     .product-hero-panel{padding:28px;}
     .product-hero-stats{grid-template-columns:1fr;}
-    .products-section{padding:36px 20px;}
-    .product-tabs{justify-content:flex-start;overflow-x:auto;flex-wrap:nowrap;padding-bottom:6px;}
-    .tab-btn{flex:0 0 auto;}
     .products-grid{grid-template-columns:1fr;}
     .why-grid{grid-template-columns:1fr;}
     .home-product-bottom{flex-direction:column;align-items:flex-start;}
     .home-product-link{width:100%;justify-content:center;}
-    .products-title h2{font-size:26px;}
-    .premium-product-image{height:220px;}
-    .page-content,.section,.message-section{padding-left:20px;padding-right:20px;}
+    .section-white-1, .section-dark-2, .section-white-2, .section-dark-3 { padding-left:20px; padding-right:20px; }
     .promo-content{left:22px;width:calc(100% - 44px);}
     .promo-content h2{font-size:25px;}
-    .promo{height:400px;}
-    .circle-card{width:96px;height:96px;}
-    .circle-card span{font-size:12.5px;}
-    .category-circles{gap:20px;}
-    .section{padding:50px 20px;}
-    .msg-form{padding:24px;}
-  }
-  @media(max-width:420px){
-    .product-hero-panel h1{font-size:30px;}
-    .promo{height:360px;}
-    .promo-content h2{font-size:22px;}
   }
 </style>
 </head>
@@ -557,144 +309,146 @@
 
 <div id="site-header"></div>
 
-<main class="product-page-shell">
+<main>
 
-  <!-- HERO -->
-  <section class="product-hero">
-    <div class="product-hero-grid">
-      <div class="product-hero-panel fade-up" data-reveal>
-        <span class="eyebrow"><span class="eyebrow-bar"></span>Premium Product Range</span>
-        <h1>Proven coatings for flawless automotive finishes</h1>
-        <p>Explore primers, clear coats, thinners and accessories engineered for consistent application, durable protection and a premium result every time.</p>
-        <div class="product-hero-actions">
-          <a href="#categories" class="btn btn-primary">Browse Categories <span>&rarr;</span></a>
-          <a href="#contact" class="btn btn-outline">Request Guidance</a>
+  <!-- ================= SECTION 1: BLACK HERO ================= -->
+  <section class="section-dark-1">
+    <div class="product-hero">
+      <div class="product-hero-grid">
+        <div class="product-hero-panel fade-up" data-reveal>
+          <span class="section-kicker">Premium Product Range</span>
+          <h1>Proven coatings for flawless automotive finishes</h1>
+          <p>Explore primers, clear coats, thinners and accessories engineered for consistent application, durable protection and a premium result every time.</p>
+          <div class="product-hero-actions">
+            <a href="#categories" class="btn btn-primary">Browse Categories <span>&rarr;</span></a>
+            <a href="#contact" class="btn btn-outline">Request Guidance</a>
+          </div>
+          <div class="product-hero-stats">
+            <div class="product-hero-stat"><strong>100+</strong><span>Product SKUs</span></div>
+            <div class="product-hero-stat"><strong>25+</strong><span>Markets Served</span></div>
+            <div class="product-hero-stat"><strong>24/7</strong><span>Technical Support</span></div>
+          </div>
         </div>
-        <div class="product-hero-stats">
-          <div class="product-hero-stat"><strong>100+</strong><span>Product SKUs</span></div>
-          <div class="product-hero-stat"><strong>25+</strong><span>Markets Served</span></div>
-          <div class="product-hero-stat"><strong>24/7</strong><span>Technical Support</span></div>
+        <div class="product-hero-visual zoom-in">
+          <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=1200&q=80&auto=format&fit=crop" alt="Professional automotive paint products">
         </div>
       </div>
-      <div class="product-hero-visual zoom-in">
-        <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=1200&q=80&auto=format&fit=crop" alt="Professional automotive paint products">
+    </div>
+
+    <!-- SIDEBAR + PROMO SLIDER -->
+    <div class="page-content">
+      <div class="main-grid">
+
+        <aside class="sidebar">
+          <div class="sidebar-head"><span>Shop by Category</span><i class="fa-solid fa-bars"></i></div>
+
+          <div class="sidebar-item">
+            <a href="#" class="sidebar-link active">
+              <span>Surface Preparation</span><span>›</span>
+            </a>
+            <div class="submenu">
+              <a href="#">Fiber Glass</a>
+              <a href="#">Body Filler</a>
+              <a href="#">Glaze Putty</a>
+              <a href="#">Primer</a>
+              <a href="#">Sealer</a>
+              <a href="#">Sandpaper</a>
+              <a href="#">Surface Cleaners</a>
+              <a href="#">Finishing Glaze</a>
+            </div>
+          </div>
+
+          <div class="sidebar-item">
+            <a href="#" class="sidebar-link">
+              <span>Coatings &amp; Paint System</span><span>›</span>
+            </a>
+            <div class="submenu">
+              <a href="#">Basecoat</a>
+              <a href="#">Clear Coat</a>
+              <a href="#">2K Top Coat</a>
+              <a href="#">Pearl Finish</a>
+              <a href="#">Metallic Finish</a>
+              <a href="#">Protective Coating</a>
+            </div>
+          </div>
+
+          <div class="sidebar-item">
+            <a href="#" class="sidebar-link">
+              <span>Solvents &amp; Chemicals</span><span>›</span>
+            </a>
+            <div class="submenu">
+              <a href="#">Thinners</a>
+              <a href="#">Reducers</a>
+              <a href="#">Hardener</a>
+              <a href="#">Catalysts</a>
+              <a href="#">Panel Wipe</a>
+              <a href="#">Cleaning Chemicals</a>
+            </div>
+          </div>
+
+          <div class="sidebar-item">
+            <a href="#" class="sidebar-link">
+              <span>Finishing &amp; Polishing</span><span>›</span>
+            </a>
+            <div class="submenu">
+              <a href="#">Compound</a>
+              <a href="#">Polish</a>
+              <a href="#">Wax</a>
+              <a href="#">Detailing Clay</a>
+              <a href="#">Applicator Pads</a>
+              <a href="#">Microfibre Cloths</a>
+            </div>
+          </div>
+
+          <a href="#" class="sidebar-more">+ More Categories</a>
+        </aside>
+
+        <div class="promo">
+          <div class="slide active">
+            <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=1400&q=80&auto=format&fit=crop" alt="Sports car with premium paint finish">
+            <div class="slide-overlay"></div>
+            <div class="promo-content">
+              <span class="promo-eyebrow">Top Quality</span>
+              <h2>Professional <span>Automotive</span><br>Paint Solutions</h2>
+              <p>Premium coating systems for durability, consistency and a flawless finish.</p>
+              <a href="#categories" class="btn btn-gold">Shop Now →</a>
+            </div>
+          </div>
+          <div class="slide">
+            <img src="https://images.unsplash.com/photo-1503736334956-4c8f8e92946d?w=1400&q=80&auto=format&fit=crop" alt="Detailed car bodywork close up">
+            <div class="slide-overlay"></div>
+            <div class="promo-content">
+              <span class="promo-eyebrow">Premium Coating</span>
+              <h2>High Performance <span>Refinishing</span><br>Products</h2>
+              <p>Trusted by professional paint workshops around the world.</p>
+              <a href="#categories" class="btn btn-gold">Explore →</a>
+            </div>
+          </div>
+          <div class="slide">
+            <img src="https://images.unsplash.com/photo-1511919884226-fd3cad34687c?w=1400&q=80&auto=format&fit=crop" alt="Luxury car with glossy finish">
+            <div class="slide-overlay"></div>
+            <div class="promo-content">
+              <span class="promo-eyebrow">Galaxy Paints</span>
+              <h2>Premium <span>Automotive</span><br>Paint Systems</h2>
+              <p>Professional solutions for every refinishing project.</p>
+              <a href="#categories" class="btn btn-gold">View Products →</a>
+            </div>
+          </div>
+          <div class="slider-dots">
+            <button class="dot active" data-i="0" aria-label="Slide 1"></button>
+            <button class="dot" data-i="1" aria-label="Slide 2"></button>
+            <button class="dot" data-i="2" aria-label="Slide 3"></button>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
 
-  <!-- SIDEBAR + PROMO SLIDER -->
-  <div class="page-content">
-    <div class="main-grid">
-
-      <aside class="sidebar">
-        <div class="sidebar-head"><span>Shop by Category</span><i class="fa-solid fa-bars"></i></div>
-
-        <div class="sidebar-item">
-          <a href="#" class="sidebar-link active">
-            <span>Surface Preparation</span><span>›</span>
-          </a>
-          <div class="submenu">
-            <a href="#">Fiber Glass</a>
-            <a href="#">Body Filler</a>
-            <a href="#">Glaze Putty</a>
-            <a href="#">Primer</a>
-            <a href="#">Sealer</a>
-            <a href="#">Sandpaper</a>
-            <a href="#">Surface Cleaners</a>
-            <a href="#">Finishing Glaze</a>
-          </div>
-        </div>
-
-        <div class="sidebar-item">
-          <a href="#" class="sidebar-link">
-            <span>Coatings &amp; Paint System</span><span>›</span>
-          </a>
-          <div class="submenu">
-            <a href="#">Basecoat</a>
-            <a href="#">Clear Coat</a>
-            <a href="#">2K Top Coat</a>
-            <a href="#">Pearl Finish</a>
-            <a href="#">Metallic Finish</a>
-            <a href="#">Protective Coating</a>
-          </div>
-        </div>
-
-        <div class="sidebar-item">
-          <a href="#" class="sidebar-link">
-            <span>Solvents &amp; Chemicals</span><span>›</span>
-          </a>
-          <div class="submenu">
-            <a href="#">Thinners</a>
-            <a href="#">Reducers</a>
-            <a href="#">Hardener</a>
-            <a href="#">Catalysts</a>
-            <a href="#">Panel Wipe</a>
-            <a href="#">Cleaning Chemicals</a>
-          </div>
-        </div>
-
-        <div class="sidebar-item">
-          <a href="#" class="sidebar-link">
-            <span>Finishing &amp; Polishing</span><span>›</span>
-          </a>
-          <div class="submenu">
-            <a href="#">Compound</a>
-            <a href="#">Polish</a>
-            <a href="#">Wax</a>
-            <a href="#">Detailing Clay</a>
-            <a href="#">Applicator Pads</a>
-            <a href="#">Microfibre Cloths</a>
-          </div>
-        </div>
-
-        <a href="#" class="sidebar-more">+ More Categories</a>
-      </aside>
-
-      <div class="promo">
-        <div class="slide active">
-          <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=1400&q=80&auto=format&fit=crop" alt="Sports car with premium paint finish">
-          <div class="slide-overlay"></div>
-          <div class="promo-content">
-            <span class="promo-eyebrow">Top Quality</span>
-            <h2>Professional <span>Automotive</span><br>Paint Solutions</h2>
-            <p>Premium coating systems for durability, consistency and a flawless finish.</p>
-            <a href="#categories" class="btn btn-gold">Shop Now →</a>
-          </div>
-        </div>
-        <div class="slide">
-          <img src="https://images.unsplash.com/photo-1503736334956-4c8f8e92946d?w=1400&q=80&auto=format&fit=crop" alt="Detailed car bodywork close up">
-          <div class="slide-overlay"></div>
-          <div class="promo-content">
-            <span class="promo-eyebrow">Premium Coating</span>
-            <h2>High Performance <span>Refinishing</span><br>Products</h2>
-            <p>Trusted by professional paint workshops around the world.</p>
-            <a href="#categories" class="btn btn-gold">Explore →</a>
-          </div>
-        </div>
-        <div class="slide">
-          <img src="https://images.unsplash.com/photo-1511919884226-fd3cad34687c?w=1400&q=80&auto=format&fit=crop" alt="Luxury car with glossy finish">
-          <div class="slide-overlay"></div>
-          <div class="promo-content">
-            <span class="promo-eyebrow">Galaxy Paints</span>
-            <h2>Premium <span>Automotive</span><br>Paint Systems</h2>
-            <p>Professional solutions for every refinishing project.</p>
-            <a href="#categories" class="btn btn-gold">View Products →</a>
-          </div>
-        </div>
-        <div class="slider-dots">
-          <button class="dot active" data-i="0" aria-label="Slide 1"></button>
-          <button class="dot" data-i="1" aria-label="Slide 2"></button>
-          <button class="dot" data-i="2" aria-label="Slide 3"></button>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- SHOP BY CATEGORY -->
-  <section class="section" id="categories">
-    <div class="section-head fade-up">
-      <div class="section-eyebrow">Categories</div>
+  <!-- ================= SECTION 2: WHITE (CATEGORIES) ================= -->
+  <section class="section-white-1" id="categories">
+    <div class="section-head-dark fade-up">
+      <div class="eyebrow-dark">Categories</div>
       <h2>Shop By Category</h2>
     </div>
 
@@ -722,8 +476,8 @@
     </div>
   </section>
 
-  <!-- FEATURED PRODUCTS -->
-  <section class="section products-section">
+  <!-- ================= SECTION 3: BLACK (PRODUCTS) ================= -->
+  <section class="section-dark-2">
     <div class="container">
 
       <div class="products-top fade-up">
@@ -876,16 +630,16 @@
       </div>
 
     </div>
+
+    <div style="text-align: center; margin-top: 50px;" class="fade-up">
+      <a href="#" class="btn btn-outline">View All Products</a>
+    </div>
   </section>
 
-  <div class="center-btn fade-up" style="padding-bottom:60px;">
-    <a href="#" class="btn btn-outline">View All Products</a>
-  </div>
-
-  <!-- WHY CHOOSE US -->
-  <section class="section" id="why">
-    <div class="section-head fade-up">
-      <div class="section-eyebrow">Why Galaxy</div>
+  <!-- ================= SECTION 4: WHITE (WHY CHOOSE US) ================= -->
+  <section class="section-white-2" id="why">
+    <div class="section-head-dark fade-up">
+      <div class="eyebrow-dark">Why Galaxy</div>
       <h2>Why Choose Us</h2>
     </div>
     <div class="why-grid stagger">
@@ -912,8 +666,8 @@
     </div>
   </section>
 
-  <!-- MESSAGE FORM -->
-  <section class="message-section" id="contact">
+  <!-- ================= SECTION 5: BLACK (CONTACT FORM) ================= -->
+  <section class="section-dark-3" id="contact">
     <div class="msg-wrap">
       <div class="spray-visual zoom-in">
         <img src="https://images.unsplash.com/photo-1622037022824-0c71f1539b08?w=700&q=80&auto=format&fit=crop" alt="Spray gun applying automotive paint">

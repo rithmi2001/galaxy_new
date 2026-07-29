@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>About Us — AutoCoat Paint Systems | Professional Automotive Coatings</title>
+<title>AutoCoat Paint Systems | Professional Automotive Coatings</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;500;600;700;800&family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700&display=swap" rel="stylesheet">
@@ -13,25 +13,28 @@
 <link rel="stylesheet" href="style.css">
 <style>
   /* =========================================================
-     DESIGN TOKENS — same industrial black / molten gold system
-     used across the Galaxy / AutoCoat site.
+     DESIGN TOKENS — High Contrast Black & White Alternating System
   ========================================================== */
   :root{
-    --black:#050505;
-    --black-soft:#0d0d0d;
-    --black-card:#0d0d0d;
-    --white:#fff;
-    --gold:#f0a91a;
-    --gold-light:#ffcf5c;
-    --grey:#a5a5a5;
-    --grey-dim:#7a7a7a;
-    --gray-light:#b0b0b0;
-    --border:rgba(255,255,255,.08);
-    --radius:18px;
-    --font-display:'Bricolage Grotesque', sans-serif;
-    --font-heavy:'Archivo Black', sans-serif;
-    --font-body:'Archivo', sans-serif;
+    --black: #050505;
+    --black-soft: #0d0d0d;
+    --black-card: #121212;
+    --white: #ffffff;
+    --white-soft: #f8f9fa;
+    --white-card: #ffffff;
+    --gold: #f0a91a;
+    --gold-light: #ffcf5c;
+    --grey-dark: #222222;
+    --grey-muted: #666666;
+    --grey: #a5a5a5;
+    --border-dark: rgba(255,255,255,.1);
+    --border-light: rgba(0,0,0,.08);
+    --radius: 18px;
+    --font-display: 'Bricolage Grotesque', sans-serif;
+    --font-heavy: 'Archivo Black', sans-serif;
+    --font-body: 'Archivo', sans-serif;
   }
+
   *{margin:0;padding:0;box-sizing:border-box;}
   html{scroll-behavior:smooth;}
   body{font-family:var(--font-body);background:var(--black);color:var(--white);line-height:1.6;overflow-x:hidden;}
@@ -41,7 +44,7 @@
   h1,h2,h3,h4{font-family:var(--font-display);}
   .container{max-width:1280px;margin:0 auto;padding:0 48px;}
 
-  /* ===== ENTRY / SLIDING SCROLL ANIMATIONS ===== */
+  /* ===== ANIMATIONS ===== */
   .fade-up{opacity:0;transform:translateY(42px);transition:opacity .9s cubic-bezier(.2,.7,.2,1), transform .9s cubic-bezier(.2,.7,.2,1);}
   .fade-up.in-view{opacity:1;transform:translateY(0);}
   .slide-left{opacity:0;transform:translateX(-60px);transition:opacity .9s cubic-bezier(.2,.7,.2,1), transform .9s cubic-bezier(.2,.7,.2,1);}
@@ -67,22 +70,16 @@
     0%,100%{transform:translateY(0);}
     50%{transform:translateY(-7px);}
   }
-  @keyframes heroPop{
-    from{opacity:0;transform:translateY(30px);}
-    to{opacity:1;transform:translateY(0);}
-  }
 
-  .about-page{background:var(--black);color:var(--white);}
-
-  /* ---------- COMMON ---------- */
+  /* ---------- BUTTONS & LABELS ---------- */
   .section-label{
     color:var(--gold);
-    font-size:.8rem;
-    font-weight:700;
+    font-size:.85rem;
+    font-weight:800;
     letter-spacing:2px;
     text-transform:uppercase;
     display:block;
-    margin-bottom:20px;
+    margin-bottom:16px;
   }
 
   .btn-primary{
@@ -91,213 +88,265 @@
     gap:10px;
     background:var(--gold);
     color:#160f00;
-    padding:15px 30px;
+    padding:16px 32px;
     border-radius:10px;
     font-weight:700;
-    font-size:14.5px;
+    font-size:15px;
     text-decoration:none;
     transition:.3s cubic-bezier(.2,.8,.2,1);
+    box-shadow:0 4px 15px rgba(240,169,26,.2);
   }
   .btn-primary:hover{
     transform:translateY(-3px);
     background:var(--gold-light);
-    box-shadow:0 12px 28px rgba(240,169,26,.35);
+    box-shadow:0 12px 28px rgba(240,169,26,.4);
   }
 
-  .about-hero,
-  .story-section,
-  .values-section,
-  .team-section{
-    padding:110px 0;
-  }
+  .section-padding{padding:120px 0;}
 
-  /* ---------- HERO ---------- */
-  .about-hero{padding-top:150px;}
+  /* =========================================================
+     ALTERNATING BG SCHEME:
+     1. HERO: Black
+     2. STATS: White
+     3. STORY: Black
+     4. VALUES: White
+     5. TEAM: Black
+     6. CTA: White
+  ========================================================== */
+
+  /* ---------- SECTION 1: HERO (BLACK) ---------- */
+  .hero-section{
+    background:var(--black);
+    color:var(--white);
+    padding-top:160px;
+    padding-bottom:120px;
+  }
   .about-grid{
     display:grid;
-    grid-template-columns:1fr 1.2fr;
+    grid-template-columns:1fr 1.1fr;
     gap:60px;
     align-items:center;
   }
-
   .about-content h1{
-    font-size:clamp(32px,5.2vw,64px);
+    font-size:clamp(36px,5.5vw,64px);
     font-weight:800;
     line-height:1.08;
     margin-bottom:25px;
     text-transform:uppercase;
   }
-
   .about-content h1 span{
     color:var(--gold);
     display:block;
   }
-
   .about-content p{
     color:var(--grey);
     line-height:1.9;
     margin-bottom:32px;
-    max-width:480px;
+    font-size:16.5px;
   }
-
-  .about-image{border-radius:20px;overflow:hidden;border:1px solid var(--border);}
+  .about-image{
+    border-radius:var(--radius);
+    overflow:hidden;
+    border:1px solid var(--border-dark);
+    box-shadow:0 20px 40px rgba(0,0,0,.5);
+  }
   .about-image img{
     width:100%;height:100%;object-fit:cover;
     aspect-ratio:4/3.2;
     transition:transform .8s ease;
   }
-  .about-image:hover img{transform:scale(1.06);}
+  .about-image:hover img{transform:scale(1.05);}
 
-  /* ---------- STATS ---------- */
-  .about-stats{padding-bottom:100px;}
+  /* ---------- SECTION 2: STATS (WHITE) ---------- */
+  .stats-section{
+    background:var(--white-soft);
+    color:var(--grey-dark);
+    border-top:1px solid var(--border-light);
+    border-bottom:1px solid var(--border-light);
+  }
   .stats-grid{
     display:grid;
     grid-template-columns:repeat(4,1fr);
-    gap:20px;
+    gap:24px;
   }
   .stat-card{
-    background:var(--black-card);
-    border:1px solid var(--border);
+    background:var(--white-card);
+    border:1px solid var(--border-light);
     border-radius:var(--radius);
-    padding:36px 30px;
+    padding:40px 30px;
     text-align:center;
     transition:.35s;
+    box-shadow:0 10px 30px rgba(0,0,0,.03);
   }
-  .stat-card:hover{transform:translateY(-8px);border-color:var(--gold);}
+  .stat-card:hover{
+    transform:translateY(-8px);
+    border-color:var(--gold);
+    box-shadow:0 15px 35px rgba(0,0,0,.08);
+  }
   .stat-card i{
-    color:var(--gold);font-size:2rem;
-    display:inline-block;animation:floatPulse 3.6s ease-in-out infinite;
+    color:var(--gold);
+    font-size:2.2rem;
+    display:inline-block;
+    animation:floatPulse 3.6s ease-in-out infinite;
   }
   .stat-card h3{
-    font-size:2.1rem;margin:16px 0 6px;font-weight:700;
+    font-size:2.4rem;
+    margin:14px 0 6px;
+    font-weight:800;
+    color:var(--grey-dark);
   }
-  .stat-card p{color:var(--grey);font-size:13.5px;text-transform:uppercase;letter-spacing:1px;}
+  .stat-card p{
+    color:var(--grey-muted);
+    font-size:13px;
+    text-transform:uppercase;
+    letter-spacing:1px;
+    font-weight:600;
+  }
 
-  /* ---------- STORY ---------- */
+  /* ---------- SECTION 3: STORY (BLACK) ---------- */
+  .story-section{
+    background:var(--black-soft);
+    color:var(--white);
+  }
   .story-grid{
     display:grid;
     grid-template-columns:1fr 1fr;
     gap:60px;
     align-items:center;
   }
-
-  .story-image{border-radius:20px;overflow:hidden;border:1px solid var(--border);}
+  .story-image{
+    border-radius:var(--radius);
+    overflow:hidden;
+    border:1px solid var(--border-dark);
+    box-shadow:0 20px 40px rgba(0,0,0,.6);
+  }
   .story-image img{
-    width:100%;height:100%;object-fit:cover;aspect-ratio:4/3.3;
+    width:100%;height:100%;object-fit:cover;
+    aspect-ratio:4/3.3;
     transition:transform .8s ease;
   }
-  .story-image:hover img{transform:scale(1.06);}
-
+  .story-image:hover img{transform:scale(1.05);}
   .story-content h2{
-    font-size:clamp(28px,3.6vw,46px);
-    line-height:1.18;
-    margin-bottom:25px;
-    font-weight:700;
+    font-size:clamp(30px,3.8vw,48px);
+    line-height:1.15;
+    margin-bottom:24px;
+    font-weight:800;
   }
-
   .story-content h2 span{
     color:var(--gold);
     display:block;
   }
-
   .story-content p{
-    color:var(--gray-light);
-    line-height:1.9;
+    color:var(--grey);
+    line-height:1.85;
     margin-bottom:20px;
+    font-size:16px;
   }
 
-  /* ---------- VALUES ---------- */
-  .values-section{background:linear-gradient(180deg, var(--black), #090909);}
+  /* ---------- SECTION 4: VALUES (WHITE) ---------- */
+  .values-section{
+    background:var(--white);
+    color:var(--grey-dark);
+  }
   .section-heading{
     text-align:center;
     margin-bottom:60px;
-    max-width:600px;
+    max-width:640px;
     margin-left:auto;
     margin-right:auto;
   }
-
   .section-heading span{
     color:var(--gold);
-    font-weight:700;
-    font-size:12.5px;
+    font-weight:800;
+    font-size:13px;
     letter-spacing:2.5px;
     text-transform:uppercase;
   }
-
   .section-heading h2{
-    margin-top:15px;
-    font-size:clamp(28px,3.6vw,42px);
-    font-weight:700;
+    margin-top:12px;
+    font-size:clamp(30px,3.6vw,44px);
+    font-weight:800;
+    color:var(--grey-dark);
   }
-
   .values-grid{
     display:grid;
     grid-template-columns:repeat(5,1fr);
     gap:20px;
   }
-
   .value-card{
-    background:var(--black-card);
-    border:1px solid var(--border);
+    background:var(--white-soft);
+    border:1px solid var(--border-light);
     border-radius:var(--radius);
-    padding:32px 26px;
+    padding:36px 24px;
     transition:.35s;
   }
-  .value-card:hover{transform:translateY(-8px);border-color:var(--gold);}
-
+  .value-card:hover{
+    transform:translateY(-8px);
+    border-color:var(--gold);
+    box-shadow:0 12px 30px rgba(0,0,0,.06);
+  }
   .value-card i{
-    color:var(--gold);font-size:2rem;
-    width:56px;height:56px;border-radius:50%;background:rgba(240,169,26,.12);
+    color:var(--gold);
+    font-size:2rem;
+    width:56px;height:56px;
+    border-radius:50%;
+    background:rgba(240,169,26,.15);
     display:flex;align-items:center;justify-content:center;
     animation:floatPulse 3.8s ease-in-out infinite;
   }
-
   .value-card h4{
-    margin:22px 0 10px;font-size:16px;font-weight:700;font-family:var(--font-body);
+    margin:22px 0 10px;
+    font-size:17px;
+    font-weight:700;
+    color:var(--grey-dark);
   }
-  .value-card p{color:var(--grey);font-size:13.5px;line-height:1.6;}
+  .value-card p{
+    color:var(--grey-muted);
+    font-size:14px;
+    line-height:1.6;
+  }
 
-  /* ---------- TEAM ---------- */
-  .team-section{background:#090909;}
+  /* ---------- SECTION 5: TEAM (BLACK) ---------- */
+  .team-section{
+    background:var(--black);
+    color:var(--white);
+  }
   .team-layout{
     display:grid;
-    grid-template-columns:350px 1fr;
-    gap:40px;
+    grid-template-columns:320px 1fr;
+    gap:50px;
   }
-
   .team-intro h2{
-    font-size:clamp(26px,3.4vw,42px);
+    font-size:clamp(28px,3.4vw,42px);
     margin-bottom:20px;
-    font-weight:700;
+    font-weight:800;
     line-height:1.2;
   }
-
   .team-intro h2 span{
     color:var(--gold);
     display:block;
   }
-
   .team-intro p{
     color:var(--grey);
     margin-bottom:30px;
     line-height:1.8;
   }
-
   .team-grid{
     display:grid;
     grid-template-columns:repeat(4,1fr);
     gap:20px;
   }
-
   .team-card{
     background:var(--black-card);
-    border:1px solid var(--border);
+    border:1px solid var(--border-dark);
     border-radius:var(--radius);
     overflow:hidden;
     transition:.35s;
   }
-  .team-card:hover{transform:translateY(-8px);border-color:var(--gold);}
-
+  .team-card:hover{
+    transform:translateY(-8px);
+    border-color:var(--gold);
+  }
   .team-card img{
     width:100%;
     height:280px;
@@ -305,133 +354,98 @@
     transition:transform .6s ease;
   }
   .team-card:hover img{transform:scale(1.08);}
-
   .team-card h4{
     padding:20px 20px 4px;
     font-size:16px;
     font-weight:700;
-    font-family:var(--font-body);
   }
-
   .team-card span{
     color:var(--gold);
     display:block;
     padding:0 20px 20px;
     font-size:13px;
+    font-weight:600;
   }
 
-  /* ---------- CTA ---------- */
-  .about-cta{
-    padding-bottom:110px;
+  /* ---------- SECTION 6: CTA (WHITE) ---------- */
+  .cta-section{
+    background:var(--white-soft);
+    padding:100px 0;
+    border-top:1px solid var(--border-light);
   }
-
   .cta-box{
     position:relative;
-    background:var(--black-card);
-    border:1px solid var(--border);
-    border-radius:20px;
-    padding:44px;
+    background:var(--grey-dark);
+    color:var(--white);
+    border-radius:24px;
+    padding:60px 48px;
     display:flex;
     justify-content:space-between;
     align-items:center;
     gap:30px;
     overflow:hidden;
+    box-shadow:0 20px 40px rgba(0,0,0,.15);
   }
   .cta-box::before{
     content:"";
     position:absolute;
-    inset:auto -8% -60% auto;
-    width:280px;height:280px;border-radius:50%;
-    background:radial-gradient(circle, rgba(240,169,26,.18), transparent 68%);
+    inset:auto -5% -50% auto;
+    width:320px;height:320px;border-radius:50%;
+    background:radial-gradient(circle, rgba(240,169,26,.3), transparent 70%);
     pointer-events:none;
   }
-
   .cta-box h3{
-    font-size:clamp(22px,2.6vw,32px);
-    margin-bottom:10px;
-    font-weight:700;
+    font-size:clamp(24px,2.8vw,36px);
+    margin-bottom:12px;
+    font-weight:800;
     position:relative;
   }
-
-  .cta-box p{color:var(--grey);position:relative;}
+  .cta-box p{
+    color:var(--grey);
+    position:relative;
+    font-size:16px;
+    max-width:540px;
+  }
   .cta-box a{position:relative;flex:0 0 auto;}
 
   /* ---------- BACK TO TOP ---------- */
   .back-to-top{
-    position:fixed;bottom:26px;right:26px;width:46px;height:46px;border-radius:50%;
+    position:fixed;bottom:26px;right:26px;width:48px;height:48px;border-radius:50%;
     background:var(--gold);color:#160f00;display:flex;align-items:center;justify-content:center;
-    font-size:19px;cursor:pointer;opacity:0;visibility:hidden;transition:.3s;z-index:200;
-    box-shadow:0 8px 20px rgba(0,0,0,.4);
+    font-size:20px;cursor:pointer;opacity:0;visibility:hidden;transition:.3s;z-index:200;
+    box-shadow:0 8px 20px rgba(0,0,0,.3);
   }
   .back-to-top.show{opacity:1;visibility:visible;}
   .back-to-top:hover{background:var(--gold-light);transform:translateY(-3px);}
-  .back-to-top:focus-visible,a:focus-visible,button:focus-visible{
-    outline:2px solid var(--gold);outline-offset:2px;
-  }
 
-  /* ---------- MOBILE ---------- */
+  /* ---------- RESPONSIVE MEDIA QUERIES ---------- */
   @media(max-width:1100px){
     .values-grid{grid-template-columns:repeat(3,1fr);}
   }
   @media(max-width:991px){
     .container{padding:0 28px;}
-    .about-hero,.story-section,.values-section,.team-section{padding:80px 0;}
-    .about-hero{padding-top:120px;}
+    .section-padding{padding:80px 0;}
+    .hero-section{padding-top:120px;padding-bottom:80px;}
 
-    .about-grid,
-    .story-grid,
-    .team-layout{
+    .about-grid, .story-grid, .team-layout{
       grid-template-columns:1fr;
     }
-
-    .about-content h1{
-      font-size:2.6rem;
-    }
-
-    .story-content h2,
-    .team-intro h2,
-    .section-heading h2{
-      font-size:2rem;
-    }
-
-    .stats-grid{
-      grid-template-columns:repeat(2,1fr);
-    }
-
-    .values-grid{
-      grid-template-columns:repeat(2,1fr);
-    }
-
-    .team-grid{
-      grid-template-columns:repeat(2,1fr);
-    }
+    .about-content h1{font-size:2.8rem;}
+    .story-content h2, .team-intro h2, .section-heading h2{font-size:2.2rem;}
+    .stats-grid, .values-grid, .team-grid{grid-template-columns:repeat(2,1fr);}
 
     .cta-box{
       flex-direction:column;
-      gap:25px;
+      gap:30px;
       text-align:center;
+      padding:40px 28px;
     }
   }
 
   @media(max-width:576px){
     .container{padding:0 20px;}
-    .team-grid{
-      grid-template-columns:1fr;
-    }
-
-    .stats-grid{
-      grid-template-columns:1fr;
-    }
-
-    .values-grid{
-      grid-template-columns:1fr;
-    }
-
-    .about-content h1{
-      font-size:2.1rem;
-    }
-    .about-content p{max-width:none;}
-    .cta-box{padding:32px 24px;}
+    .stats-grid, .values-grid, .team-grid{grid-template-columns:1fr;}
+    .about-content h1{font-size:2.2rem;}
     .team-card img{height:240px;}
   }
 </style>
@@ -440,37 +454,20 @@
 
 <div id="site-header"></div>
 
-<main class="about-page">
+<main>
 
-    <!-- ABOUT HERO -->
-    <section class="about-hero">
+    <!-- SECTION 1: HERO (BLACK BACKGROUND) -->
+    <section class="hero-section">
         <div class="container">
-
             <div class="about-grid">
 
                 <div class="about-content slide-left">
-
-                    <span class="section-label">
-                        WHO WE ARE
-                    </span>
-
-                    <h1>
-                        Driven by Passion.
-                        <span>Defined by Quality.</span>
-                    </h1>
-
-                    <p>
-                        At Galaxy Paints, we believe every surface tells a story.
-                        Established with a vision to deliver world-class coatings and
-                        finishes, we combine advanced technology with unmatched expertise
-                        to provide products professionals trust.
-                    </p>
-
+                    <span class="section-label">WHO WE ARE</span>
+                    <h1>Driven by Passion. <span>Defined by Quality.</span></h1>
+                    <p>At Galaxy Paints, we believe every surface tells a story. Established with a vision to deliver world-class coatings and finishes, we combine advanced technology with unmatched expertise to provide products professionals trust.</p>
                     <a href="#" class="btn-primary">
-                        Our Journey
-                        <i class="ri-arrow-right-line"></i>
+                        Our Journey <i class="ri-arrow-right-line"></i>
                     </a>
-
                 </div>
 
                 <div class="about-image slide-right">
@@ -478,14 +475,12 @@
                 </div>
 
             </div>
-
         </div>
     </section>
 
-    <!-- STATS -->
-    <section class="about-stats">
+    <!-- SECTION 2: STATS (WHITE BACKGROUND) -->
+    <section class="stats-section section-padding">
         <div class="container">
-
             <div class="stats-grid stagger">
 
                 <div class="stat-card">
@@ -513,15 +508,12 @@
                 </div>
 
             </div>
-
         </div>
     </section>
 
-    <!-- STORY -->
-    <section class="story-section">
-
+    <!-- SECTION 3: STORY (BLACK BACKGROUND) -->
+    <section class="story-section section-padding">
         <div class="container">
-
             <div class="story-grid">
 
                 <div class="story-image slide-left">
@@ -529,43 +521,21 @@
                 </div>
 
                 <div class="story-content slide-right">
-
-                    <span class="section-label">
-                        OUR STORY
-                    </span>
-
-                    <h2>
-                        Built on Trust.
-                        <span>Focused on Innovation.</span>
-                    </h2>
-
-                    <p>
-                        Galaxy Paints was founded with a simple mission — to deliver
-                        high-performance coatings that meet the evolving needs of
-                        professionals.
-                    </p>
-
-                    <p>
-                        From our humble beginnings to becoming a trusted name in the
-                        industry, our commitment to quality, innovation, and customer
-                        satisfaction has remained at the core of everything we do.
-                    </p>
-
+                    <span class="section-label">OUR STORY</span>
+                    <h2>Built on Trust. <span>Focused on Innovation.</span></h2>
+                    <p>Galaxy Paints was founded with a simple mission — to deliver high-performance coatings that meet the evolving needs of professionals.</p>
+                    <p>From our humble beginnings to becoming a trusted name in the industry, our commitment to quality, innovation, and customer satisfaction has remained at the core of everything we do.</p>
                     <a href="#" class="btn-primary">
                         Learn More About Us
                     </a>
-
                 </div>
 
             </div>
-
         </div>
-
     </section>
 
-    <!-- VALUES -->
-    <section class="values-section">
-
+    <!-- SECTION 4: VALUES (WHITE BACKGROUND) -->
+    <section class="values-section section-padding">
         <div class="container">
 
             <div class="section-heading fade-up">
@@ -578,66 +548,50 @@
                 <div class="value-card">
                     <i class="ri-shield-check-line"></i>
                     <h4>Quality First</h4>
-                    <p>We never compromise on quality.</p>
+                    <p>We never compromise on quality and consistency.</p>
                 </div>
 
                 <div class="value-card">
                     <i class="ri-lightbulb-flash-line"></i>
                     <h4>Innovation</h4>
-                    <p>Creative solutions that move forward.</p>
+                    <p>Creative solutions that keep your business forward.</p>
                 </div>
 
                 <div class="value-card">
                     <i class="ri-hand-heart-line"></i>
                     <h4>Integrity</h4>
-                    <p>Honest business relationships.</p>
+                    <p>Honest and trustworthy long-term relationships.</p>
                 </div>
 
                 <div class="value-card">
                     <i class="ri-team-line"></i>
                     <h4>Customer Focus</h4>
-                    <p>Your success is our success.</p>
+                    <p>Your success remains our top priority.</p>
                 </div>
 
                 <div class="value-card">
                     <i class="ri-leaf-line"></i>
                     <h4>Sustainability</h4>
-                    <p>Building for tomorrow.</p>
+                    <p>Building eco-friendly formulations for tomorrow.</p>
                 </div>
 
             </div>
 
         </div>
-
     </section>
 
-    <!-- TEAM -->
-    <section class="team-section">
-
+    <!-- SECTION 5: TEAM (BLACK BACKGROUND) -->
+    <section class="team-section section-padding">
         <div class="container">
-
             <div class="team-layout">
 
                 <div class="team-intro fade-up">
-
-                    <span class="section-label">
-                        THE PEOPLE BEHIND GALAXY
-                    </span>
-
-                    <h2>
-                        A Team That
-                        <span>Cares &amp; Delivers</span>
-                    </h2>
-
-                    <p>
-                        Our team of experts, chemists, innovators and support
-                        professionals work together to bring you the best products.
-                    </p>
-
+                    <span class="section-label">THE PEOPLE BEHIND GALAXY</span>
+                    <h2>A Team That <span>Cares &amp; Delivers</span></h2>
+                    <p>Our team of experts, chemists, innovators and support professionals work together to bring you the best products.</p>
                     <a href="#" class="btn-primary">
                         Meet Our Team
                     </a>
-
                 </div>
 
                 <div class="team-grid stagger">
@@ -669,27 +623,17 @@
                 </div>
 
             </div>
-
         </div>
-
     </section>
 
-    <!-- CTA -->
-    <section class="about-cta">
-
+    <!-- SECTION 6: CTA (WHITE BACKGROUND) -->
+    <section class="cta-section">
         <div class="container">
-
             <div class="cta-box zoom-in">
 
                 <div>
-                    <h3>
-                        Let's Create Something Extraordinary Together
-                    </h3>
-
-                    <p>
-                        Partner with Galaxy Paints for quality products,
-                        expert support and lasting results.
-                    </p>
+                    <h3>Let's Create Something Extraordinary Together</h3>
+                    <p>Partner with Galaxy Paints for quality products, expert support and lasting results.</p>
                 </div>
 
                 <a href="#contact" class="btn-primary">
@@ -697,18 +641,18 @@
                 </a>
 
             </div>
-
         </div>
-
     </section>
 
 </main>
+
 <div id="site-footer"></div>
 
 <button class="back-to-top" id="backToTop" aria-label="Back to top">&uarr;</button>
+
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script>
-  // ===== SCROLL REVEAL (entry + sliding animations) =====
+  // ===== SCROLL REVEAL ANIMATIONS =====
   const revealEls = document.querySelectorAll('.fade-up, .slide-left, .slide-right, .zoom-in, .stagger');
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -720,9 +664,9 @@
   }, { threshold: 0.15 });
   revealEls.forEach(el => observer.observe(el));
 
-  // Hero reveals immediately on load instead of waiting for scroll
+  // Hero reveals immediately on load
   window.addEventListener('load', () => {
-    document.querySelectorAll('.about-hero .slide-left, .about-hero .slide-right').forEach(el => el.classList.add('in-view'));
+    document.querySelectorAll('.hero-section .slide-left, .hero-section .slide-right').forEach(el => el.classList.add('in-view'));
   });
 
   // ===== SMOOTH SCROLL =====
@@ -739,7 +683,7 @@
     });
   });
 
-  // ===== BACK TO TOP =====
+  // ===== BACK TO TOP BUTTON =====
   const backToTop = document.getElementById('backToTop');
   window.addEventListener('scroll', () => {
     if (window.scrollY > 400) backToTop.classList.add('show');
